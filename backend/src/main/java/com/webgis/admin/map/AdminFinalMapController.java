@@ -72,7 +72,7 @@ public class AdminFinalMapController {
             @RequestParam("description") String description,
             @RequestParam("tags") List<String> tags,
             @RequestParam("zipFile") MultipartFile zipFile,
-            @RequestParam("tifFile") MultipartFile tifFile,
+            @RequestParam("tifFiles") List<MultipartFile> tifFiles,
             @RequestParam(value = "geoJsonFile", required = false) MultipartFile geoJsonFile){
 
         try {
@@ -103,10 +103,15 @@ public class AdminFinalMapController {
 
             final FinalMap savedFinalMap = finalMapService.save(finalMap);
 
-            final RasterMap rasterMap = new RasterMap(title, description);
-            rasterMap.setFinalMap(savedFinalMap);
-            rasterMapService.save(rasterMap);
-            transformTifFiles.transformIntoTileFile(rasterMap.getId(), tifFile);
+            for (MultipartFile tifFile : tifFiles) {
+                final String tifTitle = tifFile.getOriginalFilename() != null
+                        ? tifFile.getOriginalFilename()
+                        : title;
+                final RasterMap rasterMap = new RasterMap(tifTitle, description);
+                rasterMap.setFinalMap(savedFinalMap);
+                rasterMapService.save(rasterMap);
+                transformTifFiles.transformIntoTileFile(rasterMap.getId(), tifFile);
+            }
 
             return ResponseEntity.status(200).body(
                     new FinalMapListDto(savedFinalMap.getId(),

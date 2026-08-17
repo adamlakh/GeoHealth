@@ -25,13 +25,12 @@ public class RasterMapController {
     }
 
     @GetMapping("/file/{id}")
-    public ResponseEntity<RasterMap> getRiskFactorMap(@PathVariable long id) {
-        final Optional<RasterMap> riskFactorMap = rasterMapService.findById(id);
-
-        if(riskFactorMap.isPresent()){
-            return ResponseEntity.status(200).body(riskFactorMap.get());
+    public ResponseEntity<Object> getRasterMap(@PathVariable long id) {
+        final Optional<RasterMap> rasterMap = rasterMapService.findById(id);
+        if (rasterMap.isPresent()) {
+            final RasterMap r = rasterMap.get();
+            return ResponseEntity.status(200).body(new RasterMapListDto(r.getId(), r.getTitle()));
         }
-
         return ResponseEntity.status(404).build();
     }
 
@@ -40,26 +39,9 @@ public class RasterMapController {
         try {
             final List<RasterMapListDto> dtoList = new ArrayList<>();
 
-            final List<RasterMap> riskFactorMapList = rasterMapService.findRasters();
-            for (RasterMap rf : riskFactorMapList) {
-                final RasterMapListDto dto = new RasterMapListDto(rf.getId(), rf.getTitle());
-                dtoList.add(dto);
-            }
-
-            return ResponseEntity.status(200).body(dtoList);
-        } catch (Exception e) {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    @GetMapping("/riskFactors")
-    public ResponseEntity<List<RasterMapListDto>> getRiskFactors() {
-        try {
-            final List<RasterMapListDto> dtoList = new ArrayList<>();
-
-            final List<RasterMap> riskFactorList = rasterMapService.findRiskFactors();
-            for (RasterMap rasterMap : riskFactorList) {
-                final RasterMapListDto dto = new RasterMapListDto(rasterMap.getId(), rasterMap.getTitle());
+            final List<RasterMap> riskFactorMapList = rasterMapService.findAll();
+            for (RasterMap r : riskFactorMapList) {
+                final RasterMapListDto dto = new RasterMapListDto(r.getId(), r.getTitle());
                 dtoList.add(dto);
             }
 
