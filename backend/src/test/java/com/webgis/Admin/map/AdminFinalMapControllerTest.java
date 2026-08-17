@@ -1,7 +1,6 @@
 package com.webgis.admin.map;
 
 import com.webgis.MessageDto;
-import com.webgis.admin.map.AdminFinalMapController;
 import com.webgis.exception.NotFound;
 import com.webgis.map.finalmap.FinalMap;
 import com.webgis.map.finalmap.FinalMapService;
@@ -98,7 +97,7 @@ class AdminFinalMapControllerTest {
         when(finalMapService.save(any(FinalMap.class))).thenReturn(stubFinalMap(null));
 
         ResponseEntity<Object> response = controller.postShapeFile(
-                "Title", "Desc", List.of("dry"), makeZip(), makeTif(), null);
+                "Title", "Desc", List.of("dry"), makeZip(), List.of(makeTif()), null);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertInstanceOf(MessageDto.class, response.getBody());
@@ -115,7 +114,7 @@ class AdminFinalMapControllerTest {
 
         //Act
         ResponseEntity<Object> response = controller.postShapeFile(
-                "Title", "Desc", List.of("dry"), badZip, makeTif(), null);
+                "Title", "Desc", List.of("dry"), badZip, List.of(makeTif()), null);
 
         //Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -135,7 +134,7 @@ class AdminFinalMapControllerTest {
 
         //Act
         ResponseEntity<Object> response = controller.postShapeFile(
-                "Title", "Desc", List.of("dry"), makeZip(), makeTif(), badGeoJson);
+                "Title", "Desc", List.of("dry"), makeZip(), List.of(makeTif()), badGeoJson);
 
         //Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -160,7 +159,7 @@ class AdminFinalMapControllerTest {
 
         //Act
         ResponseEntity<Object> response = controller.postShapeFile(
-                "Title", "Desc", List.of("dry"), makeZip(), makeTif(), null);
+                "Title", "Desc", List.of("dry"), makeZip(), List.of(makeTif()), null);
 
         //Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

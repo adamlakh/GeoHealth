@@ -1,11 +1,13 @@
 package com.webgis.map.raster;
 
-
-
+import com.webgis.map.finalmap.FinalMap;
+import com.webgis.map.finalmap.FinalMapRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -18,14 +20,29 @@ class RasterMapRepositoryTest {
     @Autowired
     private RasterMapRepository riskFactorMapRepository;
 
+    @Autowired
+    private FinalMapRepository finalMapRepository;
+
     private void assertMapEquals(RasterMap actual, RasterMap expected) {
         assertThat(actual.getTitle()).isEqualTo(expected.getTitle());
         assertThat(actual.getDescription()).isEqualTo(expected.getDescription());
         assertThat(actual.getId()).isEqualTo(expected.getId());
     }
 
-    private RasterMap riskFactorMap1 = new RasterMap("Title1", "Description1");
-    private RasterMap riskFactorMap2 = new RasterMap("Title2", "Description2");
+    private RasterMap riskFactorMap1;
+    private RasterMap riskFactorMap2;
+
+    @BeforeEach
+    void setUp() {
+        FinalMap finalMap = new FinalMap("FM Title", "FM Description", List.of(), null, null);
+        finalMap = finalMapRepository.save(finalMap);
+
+        riskFactorMap1 = new RasterMap("Title1", "Description1");
+        riskFactorMap1.setFinalMap(finalMap);
+
+        riskFactorMap2 = new RasterMap("Title2", "Description2");
+        riskFactorMap2.setFinalMap(finalMap);
+    }
 
     @Test
     void findByIdIsOKTest(){
