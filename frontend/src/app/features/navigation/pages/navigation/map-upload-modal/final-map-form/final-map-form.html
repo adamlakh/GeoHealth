@@ -37,12 +37,28 @@
   </div>
 
   <div class="item">
-    <label>TIF file</label>
+    <label>TIF files</label>
     <div class="file-upload">
       <button type="button" class="upload-btn" (click)="tifUpload.click()">Upload</button>
-      <span class="file-name">{{ selectedTifFile?.name || 'No file uploaded yet' }}</span>
+      <span class="file-name">{{ selectedTifFiles.length }} file(s) selected</span>
     </div>
-    <input type="file" class="file-input" accept=".tif,.tiff" (change)="onTifFileSelected($event)" #tifUpload>
+    <input type="file" class="file-input" accept=".tif,.tiff" multiple (change)="onTifFileSelected($event)" #tifUpload>
+
+    @if(selectedTifFiles.length > 0) {
+    <ul class="tif-file-list">
+      @for(tif of selectedTifFiles; track tif.name + $index) {
+      <li>
+        <span class="tif-file-name">{{ tif.name }}</span>
+        <button type="button" class="remove-btn" (click)="removeTifFile($index)" aria-label="Remove file">×</button>
+      </li>
+      }
+    </ul>
+    }
+
+    @if(isFieldValid('tifFiles')) {
+    <span class="error">At least one TIF file is required</span>
+    }
+
   </div>
 
 

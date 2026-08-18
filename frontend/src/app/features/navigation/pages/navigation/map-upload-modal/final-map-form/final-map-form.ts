@@ -21,7 +21,7 @@ export class FinalMapFormComponent implements OnInit {
 
   formGroup!: FormGroup;
   selectedZipFile: File | null = null;
-  selectedTifFile: File | null = null;
+  selectedTifFiles: File[] = [];
   selectedSeason?: string;
   selectedDisease?: string;
 
@@ -32,7 +32,7 @@ export class FinalMapFormComponent implements OnInit {
       title: new FormControl('', [Validators.required, Validators.minLength(1)]),
       description: new FormControl('', [Validators.required, Validators.minLength(1)]),
       zipFile: new FormControl(null, [Validators.required]),
-      tifFile: new FormControl(null, [Validators.required]),
+      tifFiles: new FormControl(null, [Validators.required]),
       tagSeason : new FormControl('', [Validators.required]),
       tagDisease : new FormControl('', [Validators.required])
     });
@@ -51,11 +51,20 @@ export class FinalMapFormComponent implements OnInit {
   onTifFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedTifFile = input.files[0];
-      this.formGroup.get('tifFile')?.setValue(this.selectedTifFile.name);
+      const newFiles = Array.from(input.files);
+      this.selectedTifFiles = [...this.selectedTifFiles, ...newFiles];
+      this.formGroup.get('tifFiles')?.setValue(this.selectedTifFiles.length ? this.selectedTifFiles : null);
+      this.formGroup.get('tifFiles')?.markAsDirty();
     }
+    input.value = '';
   }
 
+
+  removeTifFile(index: number): void {
+    this.selectedTifFiles = this.selectedTifFiles.filter((_, i) => i !== index);
+    this.formGroup.get('tifFiles')?.setValue(this.selectedTifFiles.length ? this.selectedTifFiles : null);
+    this.formGroup.get('tifFiles')?.markAsDirty();
+  }
 
   isFieldValid(name: string): boolean {
     const formControl = this.formGroup.get(name);
@@ -63,7 +72,7 @@ export class FinalMapFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.selectedZipFile || !this.selectedTifFile) return;
+    if (!this.selectedZipFile || this.selectedTifFiles.length === 0) return;
 
     const tags = [
       this.formGroup.value.tagSeason,
@@ -75,7 +84,7 @@ export class FinalMapFormComponent implements OnInit {
     formData.append('description', this.formGroup.value.description);
     tags.forEach(tag => formData.append('tags', tag));
     formData.append('zipFile', this.selectedZipFile);
-    formData.append('tifFile', this.selectedTifFile);
+    this.selectedTifFiles.forEach(tifFile => formData.append('tifFiles', tifFile));
 
     this.adminFinalMapService.uploadNewMap(formData).subscribe({
       next: () => {},
