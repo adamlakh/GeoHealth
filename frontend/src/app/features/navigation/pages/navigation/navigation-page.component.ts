@@ -192,7 +192,11 @@ export class NavigationPageComponent implements OnInit{
     dialog.afterClosed().subscribe(
       result=>{
         this.getAllMaps();
-        this.cdr.detectChanges();}
+        this.cdr.detectChanges();
+        setTimeout(() => {
+              window.location.reload();
+            }, 5000);
+        }
     );
 
   }
