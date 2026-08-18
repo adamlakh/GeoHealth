@@ -217,7 +217,7 @@ export class MapLayerHelper {
    */
   applyDivisionsLayer(geoJsonString: string, onDivisionClick: (event: any) => void, tag?: string): void {
     const geoJson = JSON.parse(geoJsonString);
-    const isDry = tag?.toLowerCase() === 'dry';
+    const isDry = tag?.toLowerCase() === 'dry' || tag?.toLowerCase() === 'all_season';
 
     this.geoJsonLayer = this.leaflet.geoJSON(geoJson, {
       style: (feature: any) => {

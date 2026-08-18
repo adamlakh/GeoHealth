@@ -1,7 +1,7 @@
 package com.webgis.map.finalmap;
 
 public enum MapTag {
-    DRY("dry"), WET("wet"), EBOLA("ebola"), RIFT_VALLEY_FEVER("rift_valley_fever");
+    DRY("dry"), WET("wet"), ALL_SEASON("all_season"), EBOLA("ebola"), RIFT_VALLEY_FEVER("rift_valley_fever"), OTHER("other");
 
     final private String value;
 

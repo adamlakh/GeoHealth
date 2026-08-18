@@ -21,6 +21,6 @@ export class MapLegendComponent {
   }
 
   get isDry(): boolean {
-    return this.season === 'DRY';
+    return this.season === 'DRY' || this.season === 'ALL_SEASON';
   }
 }
