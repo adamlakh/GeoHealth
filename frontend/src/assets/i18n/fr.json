@@ -184,5 +184,43 @@
     "home": "Accueil",
     "login": "Se connecter",
     "register": "S'inscrire"
+  },
+  "privacy-notice": {
+    "title": "Confidentialité et cookies",
+    "intro": "En vous inscrivant et en utilisant la présente application, vous communiquez des données à caractère personnel à l'Université de Namur (UNamur). Conformément à l'article 13 du Règlement général sur la protection des données (RGPD), la présente notice vous informe de la manière dont ces données sont traitées.",
+
+    "controller-title": "1. Responsable du traitement",
+    "controller-text": "Le responsable du traitement est l'ASBL UNamur, dont le siège social est établi rue de Bruxelles 61, 5000 Namur, Belgique.",
+
+    "purpose-title": "2. Finalité du traitement",
+    "purpose-text": "Vos données sont traitées dans le cadre d'un projet de recherche scientifique (thèse de doctorat en épidémiologie spatiale menée au département de géographie de l'UNamur)  \n\nCe projet vise à recueillir l'avis d'experts en vue de valider des cartes de risque d'émergence de maladies infectieuses (fièvre de la Vallée du Rift chez le bétail et maladie à virus Ebola chez l'humain) au Cameroun.  \n\nVos réponses servent à calculer des indicateurs de concordance entre experts et avec les modèles, à des fins exclusivement scientifiques.",
+
+    "legal-basis-title": "3. Base juridique",
+    "legal-basis-text": "Le traitement est nécessaire à l'exécution d'une mission d'intérêt public dont est investie l'Université de Namur dans le cadre de ses missions de recherche scientifique (article 6 §1, e) du RGPD), telles que définies notamment par le décret de la Communauté française du 7 novembre 2013 définissant le paysage de l'enseignement supérieur.  \n\nVotre participation est entièrement volontaire : vous n'êtes pas tenu(e) de participer et pouvez interrompre votre participation à tout moment, sans justification.",
+
+    "data-processed-title": "4. Données traitées",
+    "data-processed-text": "Dans le cadre de votre inscription et de votre participation, sont traitées : vos données d'identification et de contact (nom, prénom, adresse mail) ; vos données de compte (identifiant et mot de passe, conservé sous forme sécurisée) ; vos réponses dans la grille de caractérisation de votre expérience professionnelle et expertises ; vos réponses au questionnaire de validation (évaluations, classifications, degré de certitude et commentaires libres). Nous vous invitons à limiter le contenu de vos commentaires à des observations factuelles et à ne pas y mentionner de données permettant d'identifier des tiers.",
+
+    "recipients-title": "5. Destinataires",
+    "recipients-text": "Vos données sont accessibles aux seuls membres autorisés de l'équipe de recherche encadrant le projet (la doctorante, la promotrice et, le cas échéant, la co-promotrice). Chaque session est privée : aucun autre participant ne peut consulter vos données. Vos données ne sont pas transmises à des tiers et ne font l'objet d'aucune exploitation commerciale. Les résultats de la recherche ne sont publiés que sous une forme agrégée et/ou anonymisée ne permettant pas de vous identifier.",
+
+    "location-title": "6. Localisation et transferts",
+    "location-text": "Vos données sont hébergées sur des serveurs de l'UNamur situés en Belgique (Union européenne). Aucun transfert de vos données à caractère personnel vers des destinataires situés en dehors de l'Espace économique européen n'est réalisé.",
+
+    "retention-title": "7. Durée de conservation",
+    "retention-text": "Vos données sont conservées pendant toute la durée du projet de recherche et jusqu'à décembre 2027 au maximum. Au terme de cette période, vos données sont supprimées ou anonymisées.",
+
+    "security-title": "8. Sécurité",
+    "security-text": "L'UNamur met en œuvre des mesures techniques et organisationnelles appropriées pour préserver la confidentialité, l'intégrité et la sécurité de vos données (hébergement interne, restriction des accès aux seules personnes autorisées, gestion sécurisée des mots de passe).",
+
+    "rights-title": "9. Vos droits",
+    "rights-text": "Vous disposez, dans les conditions et limites prévues par le RGPD, des droits d'accès, de rectification, d'effacement, de limitation du traitement et d'opposition. Pour en apprendre davantage sur vos droits, vous pouvez consulter la page dédiée à la vie privée sur le site de l'UNamur. Pour les exercer, contactez la déléguée à la protection des données (dpo@unamur.be).",
+
+    "complaint-title": "10. Réclamation",
+    "complaint-text": "Si vous estimez que le traitement de vos données n'est pas conforme à la réglementation, vous avez le droit d'introduire une réclamation auprès de l'Autorité de protection des données (APD), Rue de la Presse 35, 1000 Bruxelles.",
+
+    "cookie-line": "GeoHealth utilise uniquement des cookies strictement nécessaires à son bon fonctionnement. Aucun autre cookie n'est utilisé.",
+
+    "consent-checkbox": "J'ai pris connaissance de la présente notice d'information relative à la protection de mes données à caractère personnel."
   }
 }

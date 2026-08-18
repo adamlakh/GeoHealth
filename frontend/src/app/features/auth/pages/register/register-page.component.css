@@ -52,8 +52,9 @@
   z-index: 9999;
 }
 .window{
-  height:auto;
-  width: 62vh;
+  height: auto;
+  max-height: 70vh;
+  width: 50%;
   border-radius: 30px;
   border: 5px solid #90ee90;
   background-color: white;
@@ -62,13 +63,13 @@
   align-items: center;
   flex-direction: column;
   padding: 0.5rem 0.5rem;
+  overflow: hidden;
 }
 .window img{
   width: 100px;
   height: 100px;
   animation: float 3s ease-in-out infinite 0.3s;
 }
-
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -80,31 +81,70 @@
     transform: translateY(0px);
   }
 }
+.notice-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin: 12px 0;
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+
 /* phone portrait */
 @media (max-width: 768px) and (orientation: portrait){
-
   .register-page{
     background-image: url("/assets/background/phoneRegisterBackgroundPlanet.webp");
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .register{
     width: 90%;
     margin: 0;
     margin-top: 20rem;
   }
 
+  .window {
+    width: 90%;
+    max-height: 80vh;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .notice-scroll {
+    max-height: 55vh;
+  }
+
+  .window h3 {
+    font-size: 20px;
+  }
+
+  .window h4 {
+    font-size: 16px;
+  }
+
+  .window p {
+    font-size: 14px;
+  }
 }
+
 /* phone landscape */
 @media (max-width: 768px) and (orientation: landscape){
   .register-page{
     background-image: url("/assets/background/phoneRegisterLandscapeBackground.webp");
   }
-
   .register{
     width: 50%;
+  }
+
+  .window {
+    width: 70%;
+    max-height: 85vh;
+    padding: 0.75rem;
+  }
+
+  .notice-scroll {
+    max-height: 60vh;
   }
 }
 
@@ -114,12 +154,17 @@
       background-image: url("/assets/background/tabletRegisterBackgroundPlanet.webp");
       justify-content: left;
     }
-
     .register{
       width: 50%;
     }
+
+    .window {
+      width: 80%;
+      max-height: 85vh;
+      padding: 0.75rem;
+    }
+
+    .notice-scroll {
+      max-height: 60vh;
+    }
 }
-
-
-
-
