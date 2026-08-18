@@ -9,9 +9,7 @@ import {InputboxComponents} from '../../../../shared/components/inputbox.compone
 import {ErrorSuccessMessageComponent} from '../../../../shared/components/error-success-message.component/error-success-message.component';
 import {TranslocoModule, TranslocoPipe} from '@jsverse/transloco';
 import { TranslocoService } from '@jsverse/transloco';
-
-
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +21,8 @@ import { TranslocoService } from '@jsverse/transloco';
         InputboxComponents,
         ErrorSuccessMessageComponent,
         TranslocoModule,
-        TranslocoPipe
+        TranslocoPipe,
+        FormsModule
     ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',
@@ -43,6 +42,7 @@ export class RegisterPageComponent implements  OnInit {
   registerError = signal(false);
   errorMessage = signal('');
   public showWindow:boolean = true;
+  public Consented: boolean = false;
 
   /**
    * Init the form to add a new user/account to the database

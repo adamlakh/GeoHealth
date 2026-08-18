@@ -3,22 +3,68 @@
 
 <div class="register">
   @if (showWindow) {
-    <div class="cookie-popup">
-      <div class="window" data-aos="zoom-in">
-        <img src="assets/icons/planet_cookie.webp">
-        <h3>Cookies</h3>
-        <div class="link">
-          <p>{{ 'login.cookie-p' | transloco }}<a>{{ 'login.learn-more' | transloco }}</a></p>
-        </div>
-        <div class="popup-button">
+  <div class="cookie-popup">
+    <div class="window" data-aos="zoom-in">
+      <h3>{{ 'privacy-notice.title' | transloco }}</h3>
+
+      <div class="notice-scroll">
+        <p>{{ 'privacy-notice.cookie-line' | transloco }}</p>
+        <p>{{ 'privacy-notice.intro' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.controller-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.controller-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.purpose-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.purpose-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.legal-basis-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.legal-basis-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.data-processed-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.data-processed-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.recipients-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.recipients-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.location-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.location-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.retention-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.retention-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.security-title' | transloco }}</h4>
+        <p>{{ 'privacy-notice.security-text' | transloco }}</p>
+
+        <h4>{{ 'privacy-notice.rights-title' | transloco }}</h4>
+        <p>
+          {{'privacy-notice.rights-text' | transloco}}
+          <a href="https://www.unamur.be/fr/vie-privee" target="_blank" rel="noopener noreferrer">{{ 'Vie privée | UNamur ' }}</a>
+        </p>
+
+        <h4>{{ 'privacy-notice.complaint-title' | transloco }}</h4>
+        <p>
+          {{ 'privacy-notice.complaint-text' | transloco }} (<a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer">{{ 'https://www.autoriteprotectiondonnees.be'}}</a>).
+        </p>
+
+      </div>
+
+      <div class="consent-checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="Consented" [ngModelOptions]="{standalone: true}">
+          {{ 'privacy-notice.consent-checkbox' | transloco }}
+        </label>
+      </div>
+
+      <div class="popup-button">
         <app-button
           [text]="'login.cookie-button' | transloco"
           variant="success"
+          [disabled]="!Consented"
           (clicked)="closeWindow()">
         </app-button>
-        </div>
       </div>
     </div>
+  </div>
   }
   <h1 class="registerTitle">{{ 'register.title' | transloco }}</h1>
 

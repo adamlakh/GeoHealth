@@ -184,5 +184,44 @@
     "home": "Home",
     "login": "Login",
     "register": "Register"
+  },
+  "privacy-notice": {
+    "title": "Privacy & Cookies",
+    "intro": "By registering and using this application, you are sharing personal data with the University of Namur (UNamur). In accordance with Article 13 of the General Data Protection Regulation (GDPR), this notice informs you of how this data is processed.",
+
+    "controller-title": "1. Data Controller",
+    "controller-text": "The data controller is the non-profit organization UNamur, whose registered office is located at rue de Bruxelles 61, 5000 Namur, Belgium.",
+
+    "purpose-title": "2. Purpose of Processing",
+    "purpose-text": "Your data is processed as part of a scientific research project (a doctoral thesis in spatial epidemiology conducted at UNamur's Department of Geography). This project aims to gather expert opinions to validate risk maps for emerging infectious diseases (Rift Valley fever in livestock and Ebola virus disease in humans) in Cameroon. Your responses are used to calculate agreement indicators between experts and with the models, for exclusively scientific purposes.",
+
+    "legal-basis-title": "3. Legal Basis",
+    "legal-basis-text": "This processing is necessary for the performance of a task carried out in the public interest, as entrusted to the University of Namur under its scientific research mission (Article 6(1)(e) GDPR), as defined in particular by the decree of the French Community of 7 November 2013 on the higher education landscape. Your participation is entirely voluntary: you are under no obligation to participate and may withdraw at any time, without justification.",
+
+    "data-processed-title": "4. Data Processed",
+    "data-processed-text": "As part of your registration and participation, the following data is processed: your identification and contact details (name, first name, email address); your account details (username and password, stored securely); your responses in the professional experience and expertise assessment grid; and your responses to the validation questionnaire (assessments, classifications, degree of certainty, and free-text comments). We invite you to limit the content of your comments to factual observations and to avoid mentioning any information that could identify third parties.",
+
+    "recipients-title": "5. Recipients",
+    "recipients-text": "Your data is accessible only to authorized members of the research team supervising the project (the doctoral researcher, the supervisor, and, where applicable, the co-supervisor). Each session is private: no other participant can access your data. Your data is not shared with third parties and is not used for any commercial purpose. Research results are published only in an aggregated and/or anonymized form that does not allow you to be identified.",
+
+    "location-title": "6. Location and Transfers",
+    "location-text": "Your data is hosted on UNamur servers located in Belgium (European Union). No personal data is transferred to recipients located outside the European Economic Area.",
+
+    "retention-title": "7. Retention Period",
+    "retention-text": "Your data is retained for the duration of the research project, and until December 2027 at the latest. At the end of this period, your data will be deleted or anonymized.",
+
+    "security-title": "8. Security",
+    "security-text": "UNamur implements appropriate technical and organizational measures to preserve the confidentiality, integrity, and security of your data (internal hosting, access restricted to authorized personnel only, secure password management).",
+
+    "rights-title": "9. Your Rights",
+    "rights-text": "Under the conditions and limits set out in the GDPR, you have the right to access, rectify, erase, restrict the processing of, and object to your data. To learn more about your rights, you can visit the following page:",
+    "rights-contact-text": "To exercise these rights, contact the Data Protection Officer (dpo@unamur.be).",
+
+    "complaint-title": "10. Complaint",
+    "complaint-text": "If you believe that the processing of your data does not comply with the regulations, you have the right to lodge a complaint with the Data Protection Authority (APD), Rue de la Presse 35, 1000 Brussels",
+
+    "cookie-line": "GeoHealth only uses cookies that are strictly necessary for it to function properly. No other cookies are used.",
+
+    "consent-checkbox": "I have read this information notice regarding the protection of my personal data."
   }
 }
