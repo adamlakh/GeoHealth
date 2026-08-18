@@ -51,7 +51,7 @@ export class MapComponent implements AfterViewInit {
   mapTag = signal<string>('');
   mapDescription = signal<string>('');
   // the raster layer linked to this specific map, used in the dropdown
-  rasterMap = signal<RasterMapListDto | null>(null);
+  rasterMaps = signal<RasterMapListDto[]>([]);
   // list of all standalone risk factor maps, used in the dropdown
   riskFactorMaps = signal<RasterMapListDto[]>([]);
   showEvaluationModal = signal<boolean>(false);
@@ -102,7 +102,6 @@ export class MapComponent implements AfterViewInit {
    */
   async ngAfterViewInit(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) return;
-    this.loadAvailableMaps();
     this.mapId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadUserRole();
     await this.mapHelper.initMap('map', CAMEROON_COORDINATES[0], CAMEROON_ZOOM, 6, 12, true);
@@ -121,7 +120,7 @@ export class MapComponent implements AfterViewInit {
       next: (mapData) => {
         this.mapTitle.set(mapData.title);
         this.mapDescription.set(mapData.description);
-        this.rasterMap.set({ id: mapData.rasterMapId, title: 'Raster layer' });
+        this.rasterMaps.set(mapData.rasterMaps ?? []);
         this.mapTag.set(mapData.tags);
 
         const geoJson = JSON.parse(mapData.fileGeoJson);
@@ -183,31 +182,23 @@ export class MapComponent implements AfterViewInit {
    *    - "name of risk factor map" : otherwise
    * */
   onMapSelected(event: Event): void {
-    const value : string = (event.target as HTMLSelectElement).value;
+      const value: string = (event.target as HTMLSelectElement).value;
 
-    if (!value || value == 'Division only') { // if value is empty or equal Division only
+      if (!value || value == 'Division only') { // if value is empty or equal Division only
+        this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
+        return;
+      }
+
+      const found = this.rasterMaps().find(
+        map => map.id === Number(value) || map.title.replaceAll('_', ' ') === value
+      );
+
+      if (found) {
+        this.mapHelper.switchTo({ id: found.id, kind: 'raster', title: '' });
+        return;
+      }
+
       this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
-      return;
-    }
-
-    // If the user write the name of the risk factor instead of its ID
-    const findWordForRiskFactor = this.riskFactorMaps().find(
-      map => map.title == value || map.id == Number(value)
-    );
-
-    const raster = this.rasterMap();
-    if (raster && (raster.title == value || raster.id == Number(value))) {
-      this.mapHelper.switchTo({ id: raster.id, kind: 'raster', title: '' });
-      return;
-    }
-
-    if (findWordForRiskFactor) { // findWordForRiskFactor is not empty
-      this.mapHelper.switchTo({ id: findWordForRiskFactor.id, kind: 'raster', title: '' });
-      return;
-    } else {
-      this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
-      return;
-    }
   }
 
   /**

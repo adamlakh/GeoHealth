@@ -2,12 +2,11 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import {FinalMapFormComponent} from './final-map-form/final-map-form'
-import {RiskFactorFormComponent} from './risk-factor-form/risk-factor-form'
 
 @Component({
   selector: 'app-map-upload-modal',
   standalone: true,
-  imports: [CommonModule, FinalMapFormComponent, RiskFactorFormComponent],
+  imports: [CommonModule, FinalMapFormComponent],
   templateUrl: './map-upload-modal.html',
   styleUrl: './map-upload-modal.css'
 })

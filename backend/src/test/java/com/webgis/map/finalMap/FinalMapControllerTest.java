@@ -45,7 +45,7 @@ class FinalMapControllerTest {
         fm2 = new FinalMap("test2", "testdescription2", list, byteaEmpty, "fakefile2");
         RasterMap rasterMap = new RasterMap("raster1", "raster description");
         rasterMap.setFinalMap(fm1);
-        fm1.setRasterMap(rasterMap);
+        fm1.setRasterMaps(List.of(rasterMap));
         id = 1;
     }
 
@@ -68,7 +68,9 @@ class FinalMapControllerTest {
         assertEquals(result.id(), fm1.getId());
         assertEquals(result.description(), fm1.getDescription());
         assertEquals(result.fileGeoJson(), fm1.getFileGeoJson());
-        assertEquals(result.rasterMapId(), fm1.getRasterMap().getId());
+        assertEquals(1, result.rasterMaps().size());
+        assertEquals(fm1.getRasterMaps().get(0).getId(), result.rasterMaps().get(0).id());
+        assertEquals(fm1.getRasterMaps().get(0).getTitle(), result.rasterMaps().get(0).title());
     }
 
     @Test

@@ -53,11 +53,4 @@ public class RasterMapService {
         return this.rasterMapRepository.findAll();
     }
 
-    public List<RasterMap> findRiskFactors(){
-        return this.rasterMapRepository.findByFinalMapIsNull();
-    }
-
-    public List<RasterMap> findRasters(){
-        return this.rasterMapRepository.findByFinalMapIsNotNull();
-    }
 }

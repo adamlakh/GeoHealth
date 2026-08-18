@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Basic;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
 import java.util.List;
@@ -34,8 +34,8 @@ public class FinalMap {
     @Column(name = "file_geo_json", columnDefinition = "TEXT")
     private String fileGeoJson;
 
-    @OneToOne(mappedBy = "finalMap", cascade = CascadeType.ALL)
-    private RasterMap rasterMap;
+    @OneToMany(mappedBy = "finalMap", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RasterMap> rasterMaps;
 
     public FinalMap(){}
 
@@ -80,7 +80,7 @@ public class FinalMap {
         return fileGeoJson;
     }
 
-    public RasterMap getRasterMap() { return rasterMap; }
+    public List<RasterMap> getRasterMaps() { return rasterMaps; }
 
     public void setId(Long id) {
         this.id = id;
@@ -104,6 +104,6 @@ public class FinalMap {
         this.fileGeoJson = fileGeoJson;
     }
 
-    public void setRasterMap(RasterMap rasterMap) { this.rasterMap = rasterMap; }
+    public void setRasterMaps(List<RasterMap> rasterMaps) { this.rasterMaps = rasterMaps; }
 }
 

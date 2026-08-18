@@ -3,6 +3,7 @@ package com.webgis.map.finalmap;
 import com.webgis.MessageDto;
 import com.webgis.map.finalmap.dto.FinalMapDto;
 import com.webgis.map.finalmap.dto.FinalMapListDto;
+import com.webgis.map.raster.dto.RasterMapListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,13 +29,18 @@ public class FinalMapController {
             final Optional<FinalMap> optionalMap = finalMapService.findById(id);
             if (optionalMap.isPresent()) {
                 final FinalMap finalMap = optionalMap.get();
+
+                final List<RasterMapListDto> rasterMaps = finalMap.getRasterMaps().stream()
+                        .map(r -> new RasterMapListDto(r.getId(), r.getTitle()))
+                        .toList();
+
                 final FinalMapDto finalMapDto = new FinalMapDto(
                         finalMap.getId(),
                         finalMap.getTitle(),
                         finalMap.getDescription(),
                         finalMap.getTags(),
                         finalMap.getFileGeoJson(),
-                        finalMap.getRasterMap().getId());
+                        rasterMaps);
                 return ResponseEntity.status(200).body(finalMapDto);
             }
             return ResponseEntity.status(404).body(new MessageDto("Map not found"));

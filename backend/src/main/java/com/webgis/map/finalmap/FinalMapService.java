@@ -42,6 +42,7 @@ public class FinalMapService {
      * @param id identifier of the map you want to retrieve from the db
      * @return Map which identifier equals to id, empty otherwise
      */
+    @Transactional
     public Optional<FinalMap> findById(long id){
         return finalMapRepository.findById(id);
     }
@@ -78,12 +79,14 @@ public class FinalMapService {
             throw new IllegalArgumentException("Map does not exist");
         }
         final FinalMap finalMapDel = map.get();
-        final RasterMap rasterMap= map.get().getRasterMap();
+        final List<RasterMap> rasterMaps = finalMapDel.getRasterMaps();
 
         //Delete all the tile link to the raster map
-        final List<Tile> tiles= tileService.allTileForAspecificRasterMap(rasterMap);
-        for(Tile tile:tiles){
-            tileService.deleteTile(tile.getTileId());
+        for (RasterMap rasterMap : rasterMaps) {
+            final List<Tile> tiles = tileService.allTileForAspecificRasterMap(rasterMap);
+            for (Tile tile : tiles) {
+                tileService.deleteTile(tile.getTileId());
+            }
         }
 
         //Delete forms linked to the map

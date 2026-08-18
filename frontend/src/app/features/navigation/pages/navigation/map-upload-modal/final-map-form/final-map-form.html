@@ -37,48 +37,73 @@
   </div>
 
   <div class="item">
-    <label>TIF file</label>
+    <label>TIF files</label>
     <div class="file-upload">
       <button type="button" class="upload-btn" (click)="tifUpload.click()">Upload</button>
-      <span class="file-name">{{ selectedTifFile?.name || 'No file uploaded yet' }}</span>
+      <span class="file-name">{{ selectedTifFiles.length }} file(s) selected</span>
     </div>
-    <input type="file" class="file-input" accept=".tif,.tiff" (change)="onTifFileSelected($event)" #tifUpload>
+    <input type="file" class="file-input" accept=".tif,.tiff" multiple (change)="onTifFileSelected($event)" #tifUpload>
+
+    @if(selectedTifFiles.length > 0) {
+    <ul class="tif-file-list">
+      @for(tif of selectedTifFiles; track tif.name + $index) {
+      <li>
+        <span class="tif-file-name">{{ tif.name }}</span>
+        <button type="button" class="remove-btn" (click)="removeTifFile($index)" aria-label="Remove file">×</button>
+      </li>
+      }
+    </ul>
+    }
+
+    @if(isFieldValid('tifFiles')) {
+    <span class="error">At least one TIF file is required</span>
+    }
+
   </div>
 
 
 
-  <div class="checkbox">
-    <div>
-      <input type="radio" id="tagDisease1" value="EBOLA" formControlName="tagDisease" >
-      <label for="tagDisease1">  Ebola</label>
-    </div>
-
-    <div>
-      <input type="radio" id="tagDisease2" value="RIFT_VALLEY_FEVER" formControlName="tagDisease" >
-      <label for="tagDisease2" >  Rift valley fever</label>
+  <fieldset class="tag-group">
+    <legend>Sickness</legend>
+    <div class="tag-options">
+      <div class="tag-option">
+        <input type="radio" id="tagDisease1" value="EBOLA" formControlName="tagDisease">
+        <label for="tagDisease1">Ebola</label>
+      </div>
+      <div class="tag-option">
+        <input type="radio" id="tagDisease2" value="RIFT_VALLEY_FEVER" formControlName="tagDisease">
+        <label for="tagDisease2">Rift valley fever</label>
+      </div>
+      <div class="tag-option">
+        <input type="radio" id="tagDisease3" value="OTHER" formControlName="tagDisease">
+        <label for="tagDisease3">Other</label>
+      </div>
     </div>
     @if(isFieldValid('tagDisease')) {
-      <span class="error">Please select a choice</span>
+    <span class="error">Please select a choice</span>
     }
-  </div>
+  </fieldset>
 
-
-  <div class="checkbox">
-    <div>
-      <input type="radio" id="tagSeason1" value="DRY" formControlName="tagSeason">
-      <label for="tagSeason1">  Dry </label>
-    </div>
-
-    <div>
-      <input type="radio" id="tagSeason2" value="WET" formControlName="tagSeason">
-      <label for="tagSeason2" >  Wet </label>
+  <fieldset class="tag-group">
+    <legend>Season</legend>
+    <div class="tag-options">
+      <div class="tag-option">
+        <input type="radio" id="tagSeason1" value="DRY" formControlName="tagSeason">
+        <label for="tagSeason1">Dry</label>
+      </div>
+      <div class="tag-option">
+        <input type="radio" id="tagSeason2" value="WET" formControlName="tagSeason">
+        <label for="tagSeason2">Wet</label>
+      </div>
+      <div class="tag-option">
+        <input type="radio" id="tagSeason3" value="ALL_SEASON" formControlName="tagSeason">
+        <label for="tagSeason3">All season</label>
+      </div>
     </div>
     @if(isFieldValid('tagSeason')) {
-      <span class="error">Please select a choice</span>
+    <span class="error">Please select a choice</span>
     }
-  </div>
-
-
+  </fieldset>
 
   <div class="footer">
     <button type="submit" class="submit-btn" [disabled]="formGroup.invalid || isUploading">

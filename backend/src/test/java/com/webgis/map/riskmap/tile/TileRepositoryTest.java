@@ -1,7 +1,10 @@
 package com.webgis.map.riskmap.tile;
 
 
+import com.webgis.map.finalmap.FinalMap;
+import com.webgis.map.finalmap.FinalMapRepository;
 import com.webgis.map.raster.RasterMap;
+import com.webgis.map.raster.RasterMapRepository;
 import com.webgis.map.tile.Tile;
 import com.webgis.map.tile.TileId;
 import com.webgis.map.tile.TileRepository;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TileRepositoryTest {
     @Autowired
     private TileRepository tileRepository;
+
+    @Autowired
+    private FinalMapRepository finalMapRepository;
+
+    @Autowired
+    private RasterMapRepository rasterMapRepository;
 
     private void assertMapEquals(Tile actual, Tile expected) {
         assertThat(actual.getTileId()).isEqualTo(expected.getTileId());
@@ -35,8 +45,17 @@ class TileRepositoryTest {
     @BeforeEach
     void init(){
         // Arrange
+        FinalMap finalMap = finalMapRepository.save(
+                new FinalMap("FM Title", "FM Description", List.of(), null, null));
+
         RasterMap riskFactorMap = new RasterMap("Title1", "Description1");
+        riskFactorMap.setFinalMap(finalMap);
+        riskFactorMap = rasterMapRepository.save(riskFactorMap);
+
         RasterMap riskFactorMap2 = new RasterMap("Title2", "Description2");
+        riskFactorMap2.setFinalMap(finalMap);
+        riskFactorMap2 = rasterMapRepository.save(riskFactorMap2);
+
         TileId tileId1 = new TileId(1L,1,1,1);
         tileId2 = new TileId(2L,2,2,2);
         tileId3 = new TileId(3L,3,3,3);

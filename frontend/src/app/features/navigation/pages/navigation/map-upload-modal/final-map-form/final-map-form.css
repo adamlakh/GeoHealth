@@ -73,3 +73,104 @@
 
   margin-top: 7px;
 }
+
+.tif-file-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.tif-file-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #f6f9f4;
+  border: 1px solid #e2e6ea;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.tif-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-btn {
+  border: none;
+  background: transparent;
+  color: #c0392b;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.remove-btn:hover {
+  color: #8e2a1e;
+}
+
+.tag-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.tag-group legend {
+  font-weight: 600;
+  font-size: 13px;
+  padding: 0 0 6px;
+}
+
+.tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-option {
+  position: relative;
+}
+
+.tag-option input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.tag-option label {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #d7dedb;
+  background: #f6f9f4;
+  color: #444;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tag-option label:hover {
+  background: #eaf6e4;
+}
+
+.tag-option input:checked + label {
+  background: #3a8c24;
+  border-color: #3a8c24;
+  color: white;
+}
+
+.tag-option input:focus-visible + label {
+  outline: 2px solid #3a8c24;
+  outline-offset: 2px;
+}

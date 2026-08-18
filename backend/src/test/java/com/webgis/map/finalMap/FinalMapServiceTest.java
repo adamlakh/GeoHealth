@@ -67,8 +67,8 @@ class FinalMapServiceTest {
     @Test
     void deleteMapValid(){
         // Arrange
+        fm1.setRasterMaps(new ArrayList<>());
         when(finalMapRepository.findById(id)).thenReturn(Optional.of(fm1));
-        when(tileService.allTileForAspecificRasterMap(any())).thenReturn(List.of());
         when(evaluationFormService.getAllFormForFinalMap(fm1)).thenReturn(List.of());
 
         // Act
