@@ -29,7 +29,7 @@
       <select (change)="onMapSelected($event)" class="mobile-dropdown">
         <option value="">{{ 'map.dropdown' | transloco }}</option>
         @for(map of rasterMaps(); track map.id) {
-        <option [value]="map.id">{{ map.title.replaceAll('_', ' ').replace('.tif', '').replace('.tiff', '') }}</option>
+        <option [value]="map.id">{{ getRasterLabel(map.title) }}</option>
         }
       </select>
       <!-- end of the mobile dropdown -->
@@ -51,7 +51,7 @@
       <datalist id="risk-factor-list">
         <option [value]="'map.dropdown' | transloco">{{ 'map.dropdown' | transloco }}</option>
         @for(map of rasterMaps(); track map.id) {
-        <option [value]="map.title.replaceAll('_', ' ').replace('.tif', '').replace('.tiff', '')">{{ map.title.replaceAll('_', ' ').replace('.tif', '').replace('.tiff', '') }}</option>
+        <option [value]="getRasterLabel(map.title)">{{ getRasterLabel(map.title) }}</option>
         }
       </datalist>
 

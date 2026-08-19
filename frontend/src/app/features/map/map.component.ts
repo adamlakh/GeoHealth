@@ -10,7 +10,8 @@ import {UsersServices} from '../../core/service/UserService/users-services';
 import {AdminEvaluationFormService} from '../../core/service/AdminService/AdminEvaluationFormService/AdminEvaluationFormService';
 import {AdminResponseEvaluationFormDto} from '../../shared/models/AdminModel/EvaluationFormModel/AdminResponseEvaluationFormDto';
 import { MapLayerHelper } from './map-layer-helper';
-import { RISK_LEVELS, getRiskColor } from './map-utils';
+import { TranslocoService } from '@jsverse/transloco';
+import { RISK_LEVELS, getRiskColor, normalizeRasterTitle } from './map-utils';
 import {CAMEROON_COORDINATES} from './map.constants';
 import {CAMEROON_ZOOM} from './map.constants';
 import {AnnotationService} from '../../core/service/MapService/AnnotationService/AnnotationService';
@@ -52,8 +53,7 @@ export class MapComponent implements AfterViewInit {
   mapDescription = signal<string>('');
   // the raster layer linked to this specific map, used in the dropdown
   rasterMaps = signal<RasterMapListDto[]>([]);
-  // list of all standalone risk factor maps, used in the dropdown
-  riskFactorMaps = signal<RasterMapListDto[]>([]);
+
   showEvaluationModal = signal<boolean>(false);
   // the existing evaluation form for the selected division
   existingForm = signal<ResponseEvaluationFormDto | null>(null);
@@ -89,7 +89,8 @@ export class MapComponent implements AfterViewInit {
     private evaluatorAgreementMeasureService:EvaluatorAgreementMeasureService,
     private meanMeasureService: MeanMeasureService,
     private modelEvaluationMeasureService: ModelEvaluationMeasureService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private translocoService: TranslocoService
     ){
    this.mapMetrics= new MapMetrics(
         this.evaluatorAgreementMeasureService,
@@ -146,20 +147,6 @@ export class MapComponent implements AfterViewInit {
   }
 
   /**
-   * Fetches all standalone risk factor maps and populates the dropdown
-   */
-  private loadAvailableMaps(): void {
-    this.rasterMapService.getRiskFactors().subscribe({
-      next: (maps:RasterMapListDto[]) => {
-        this.riskFactorMaps.set(maps);
-      },
-      error: (err) => {
-        console.error('Failed to load risk factor maps', err);
-      }
-    });
-  }
-
-  /**
    * Checks if the connected user is an admin
    * and loads the appropriate evaluation forms accordingly
    */
@@ -174,6 +161,17 @@ export class MapComponent implements AfterViewInit {
   // --- Map Interaction ---
 
   /**
+   * Returns the translated label for a raw raster title (e.g. "Deforestation.tif"),
+   * falling back to the cleaned-up raw title if no translation entry exists.
+   */
+  getRasterLabel(rawTitle: string): string {
+    const cleanTitle = normalizeRasterTitle(rawTitle);
+    const key = 'rasterNames.' + cleanTitle;
+    const translated = this.translocoService.translate(key);
+    return translated === key ? cleanTitle : translated;
+  }
+
+  /**
    * Method called when the user selects a risk factor map
    * (or division only by default) to adapt the map displayed
    *
@@ -183,23 +181,24 @@ export class MapComponent implements AfterViewInit {
    * */
   onMapSelected(event: Event): void {
       const value: string = (event.target as HTMLSelectElement).value;
+      const placeholder = this.translocoService.translate('map.dropdown');
 
-      if (!value || value == 'Division only') { // if value is empty or equal Division only
+      if (!value || value === placeholder) {
+          this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
+          return;
+        }
+
+        const found = this.rasterMaps().find(
+          map => map.id === Number(value) || this.getRasterLabel(map.title) === value
+        );
+
+        if (found) {
+          this.mapHelper.switchTo({ id: found.id, kind: 'raster', title: '' });
+          return;
+        }
+
         this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
-        return;
       }
-
-      const found = this.rasterMaps().find(
-        map => map.id === Number(value) || map.title.replaceAll('_', ' ') === value
-      );
-
-      if (found) {
-        this.mapHelper.switchTo({ id: found.id, kind: 'raster', title: '' });
-        return;
-      }
-
-      this.mapHelper.switchTo({ id: null, kind: 'divisions', title: 'Risk Overview - Divisions' });
-  }
 
   /**
    * Handles a click on a division.

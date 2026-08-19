@@ -38,3 +38,24 @@ export function getColorFromCmbnd(value: number, isDry: boolean): string {
     return `rgb(${r}, ${g}, ${b})`;
   }
 }
+
+
+/**
+  * Normalizes a raw raster filename into a stable, matchable string:
+  * strips .tif/.tiff regardless of case
+  * replaces underscores with spaces
+  * collapses multiple spaces into one
+  * normalizes en dash (–), em dash (—) and hyphen (-) to a single dash
+  * trims leading/trailing whitespace\
+  *
+  * @param title the raw raster filename
+  * @return a normalized string suitable for matching
+  */
+export function normalizeRasterTitle(title: string): string {
+  return title
+    .replace(/\.tiff?$/i, '')
+    .replaceAll('_', ' ')
+    .replace(/[–—]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
