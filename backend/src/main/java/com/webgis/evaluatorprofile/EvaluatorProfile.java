@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "evaluatorProfiles")
-public class EvaluatorProfile implements AutoCloseable {
+public class EvaluatorProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

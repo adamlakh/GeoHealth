@@ -67,6 +67,11 @@ export const API_ENDPOINTS = {
       NATIONALMODELFIELDAGREEMENTSCORE:"/modelEvaluationMeasure/nationalModelFieldAgreementScore"
     }
   },
+  EVALUATORPROFILE: {
+    SAVE: "/evaluatorProfile/save",
+    HASPROFILE: "/evaluatorProfile/hasProfile",
+    GETPROFILE: "/evaluatorProfile/getProfile"
+  },
   REPORT: {
     GET:"/report/getReport"
   }
