@@ -84,4 +84,34 @@ public class EvaluatorProfileService {
                 dto.yearsInvolved()
         );
     }
+
+
+    /**
+     * Updates the existing evaluator profile for the given user.
+     *
+     * @param dto  The data transfer object containing the updated profile information.
+     * @param user The user whose profile is being updated.
+     * @return The updated EvaluatorProfile entity.
+     * @throws IllegalArgumentException if the user has no existing profile.
+     */
+    public EvaluatorProfile updateProfile(SaveEvaluatorProfileDto dto, User user) {
+        final Optional<EvaluatorProfile> optionalProfile = getProfileForUser(user);
+        if (optionalProfile.isEmpty()) {
+            throw new IllegalArgumentException("User does not have a profile to update");
+        }
+
+        final EvaluatorProfile evaluatorProfile = optionalProfile.get();
+
+        evaluatorProfile.setProfessions(dto.professions());
+        evaluatorProfile.setSectors(dto.sectors());
+        evaluatorProfile.setInterventionLevels(dto.interventionLevels());
+        evaluatorProfile.setSectorsWorkedIn(dto.sectorsWorkedIn());
+        evaluatorProfile.setCountries(dto.countries());
+        evaluatorProfile.setRegions(dto.regions());
+        evaluatorProfile.setDivisions(dto.divisions());
+        evaluatorProfile.setRvfExperience(toDiseaseExperience(dto.rvfExperience()));
+        evaluatorProfile.setEvdExperience(toDiseaseExperience(dto.evdExperience()));
+
+        return evaluatorProfileRepository.save(evaluatorProfile);
+    }
 }

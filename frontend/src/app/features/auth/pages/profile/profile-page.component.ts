@@ -76,6 +76,10 @@ export class ProfilePageComponent implements OnInit{
     this.router.navigate(['change-password'])
   }
 
+  public goToEvaluatorProfile(){
+    this.router.navigate(['/evaluator-profile'])
+  }
+
   /**
    * Toggle the value of the isEditingField
    *

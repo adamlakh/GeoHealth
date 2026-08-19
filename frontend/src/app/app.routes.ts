@@ -10,7 +10,7 @@ import {ProfilePageComponent} from './features/auth/pages/profile/profile-page.c
 import {ChangePasswordPageComponent} from './features/auth/pages/change-password/change-password-page.component';
 import {adminGuard} from './features/admin/guard/admin-guard';
 import {AboutComponent} from './features/about/pages/about/about/about.component';
-
+import {EvaluatorProfile} from './features/evaluator-profile/evaluator-profile';
 
 export const routes: Routes = [
   {
@@ -48,6 +48,10 @@ export const routes: Routes = [
   },{
     path:'change-password',
     component: ChangePasswordPageComponent,
+  },{
+    path: 'evaluator-profile',
+    component: EvaluatorProfile,
+    canActivate: [authGuard],
   },{
     path: '**',
     redirectTo: 'home',

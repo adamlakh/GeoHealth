@@ -258,5 +258,86 @@
     "Proportion of permanent water bodies": "Proportion de plans d'eau permanents",
     "Rainfall index - dry season": "Indice de pluviométrie - saison sèche",
     "Index of distance to major and minor rivers - dry season": "Indice de proximité aux cours d'eau principaux et secondaires - saison sèche"
+  },
+  "evaluatorProfile": {
+    "title": "Profil de l'évaluateur",
+    "generalProfileTitle": "Profil général",
+    "professionsLabel": "Profession(s) :",
+    "professions": {
+      "medicalDoctor": "Médecin",
+      "medicalNurse": "Infirmier(ère)",
+      "medicalLabTech": "Technicien(ne) de laboratoire médical",
+      "veterinaryDoctor": "Vétérinaire",
+      "veterinaryNurse": "Infirmier(ère) vétérinaire",
+      "veterinaryLabTech": "Technicien(ne) de laboratoire vétérinaire",
+      "zootechnician": "Zootechnicien(ne)",
+      "agriculturalEngineer": "Ingénieur(e) agronome",
+      "wildlifeOfficer": "Agent(e) de la faune sauvage",
+      "animalHealthAuthority": "Autorité sanitaire animale / Décideur politique",
+      "publicHealthAuthority": "Autorité de santé publique / Décideur politique",
+      "researcher": "Chercheur(euse)",
+      "lecturer": "Enseignant(e) / Professeur(e)",
+      "other": "Autre"
+    },
+    "sectorsLabel": "Secteur(s) d'emploi :",
+    "sectors": {
+      "public": "Public",
+      "private": "Privé",
+      "both": "Les deux",
+      "other": "Autre"
+    },
+    "interventionLevelsLabel": "Niveau d'intervention :",
+    "interventionLevels": {
+      "national": "National",
+      "regional": "Régional",
+      "divisional": "Niveau divisionnaire",
+      "healthDistrict": "District sanitaire",
+      "other": "Autre"
+    },
+    "sectorsWorkedInLabel": "Secteur(s) dans lesquels vous travaillez :",
+    "sectorsWorkedIn": {
+      "livestock": "Élevage",
+      "agriculture": "Agriculture",
+      "publicHealth": "Santé publique",
+      "wildlife": "Faune sauvage",
+      "forests": "Forêts",
+      "environmental": "Environnement",
+      "publicAdministration": "Administration publique - Décideur politique",
+      "other": "Autre"
+    },
+    "locationLabel": "Zones de pratique professionnelle",
+    "country": "Pays",
+    "region": "Région",
+    "division": "Division",
+    "rvfTitle": "Expérience - Fièvre de la vallée du Rift",
+    "evdTitle": "Expérience - Maladie à virus Ebola",
+    "pathogenKnowledge": "Connaissance du pathogène (1-10)",
+    "transmissionKnowledge": "Connaissance de la transmission (1-10)",
+    "animalClinicalKnowledge": "Connaissance clinique chez l'animal (1-10)",
+    "humanClinicalKnowledge": "Connaissance clinique chez l'humain (1-10)",
+    "professionallyExposed": "Exposition professionnelle",
+    "yes": "Oui",
+    "no": "Non",
+    "exposureFrequencyLabel": "Fréquence d'exposition",
+    "exposureFrequency": {
+      "veryFrequently": "Très fréquemment (presque tous les mois)",
+      "frequently": "Fréquemment (au moins deux fois par an)",
+      "rarely": "Rarement (au moins une fois par an)",
+      "veryRare": "Très rarement (au moins une fois dans la carrière)",
+      "never": "Jamais"
+    },
+    "yearsInvolvedLabel": "Années d'implication",
+    "yearsInvolved": {
+      "lessThan5": "< 5 ans",
+      "from5to10": "5-10 ans",
+      "from10to15": "10-15 ans",
+      "moreThan15": "> 15 ans"
+    },
+    "otherPlaceholder": "Veuillez préciser",
+    "submit": "Soumettre",
+    "validationError": "Certaines informations sont manquantes ou mal renseignées. Veuillez compléter tous les champs.",
+    "submit": "Soumettre",
+    "edit": "Modifier",
+    "save": "Enregistrer"
   }
 }

@@ -259,5 +259,86 @@
     "Proportion of permanent water bodies": "Proportion of permanent water bodies",
     "Rainfall index - dry season": "Rainfall index - dry season",
     "Index of distance to major and minor rivers - dry season": "Index of distance to major and minor rivers - dry season"
+  },
+  "evaluatorProfile": {
+    "title": "Evaluator Profile",
+    "generalProfileTitle": "General profile",
+    "professionsLabel": "Profession(s):",
+    "professions": {
+      "medicalDoctor": "Medical doctor",
+      "medicalNurse": "Medical nurse",
+      "medicalLabTech": "Medical laboratory technician",
+      "veterinaryDoctor": "Veterinary doctor",
+      "veterinaryNurse": "Veterinary nurse",
+      "veterinaryLabTech": "Veterinary laboratory technician",
+      "zootechnician": "Zootechnician",
+      "agriculturalEngineer": "Agricultural engineer",
+      "wildlifeOfficer": "Wildlife officer",
+      "animalHealthAuthority": "Animal health authority / Policy maker",
+      "publicHealthAuthority": "Public health authority / Policy maker",
+      "researcher": "Researcher",
+      "lecturer": "Lecturer / Teacher",
+      "other": "Other"
+    },
+    "sectorsLabel": "Sector(s) of employment:",
+    "sectors": {
+      "public": "Public",
+      "private": "Private",
+      "both": "Both",
+      "other": "Other"
+    },
+    "interventionLevelsLabel": "Level of intervention:",
+    "interventionLevels": {
+      "national": "National",
+      "regional": "Regional",
+      "divisional": "Divisional level",
+      "healthDistrict": "Health District",
+      "other": "Other"
+    },
+    "sectorsWorkedInLabel": "Sector(s) you work in:",
+    "sectorsWorkedIn": {
+      "livestock": "Livestock",
+      "agriculture": "Agriculture",
+      "publicHealth": "Public health",
+      "wildlife": "Wildlife",
+      "forests": "Forests",
+      "environmental": "Environmental",
+      "publicAdministration": "Public administration - Political decision-maker",
+      "other": "Other"
+    },
+    "locationLabel": "Areas of professional practice",
+    "country": "Country",
+    "region": "Region",
+    "division": "Division",
+    "rvfTitle": "Rift Valley Fever experience",
+    "evdTitle": "Ebola Virus Disease experience",
+    "pathogenKnowledge": "Pathogen knowledge (1-10)",
+    "transmissionKnowledge": "Transmission knowledge (1-10)",
+    "animalClinicalKnowledge": "Animal clinical knowledge (1-10)",
+    "humanClinicalKnowledge": "Human clinical knowledge (1-10)",
+    "professionallyExposed": "Professionally exposed",
+    "yes": "Yes",
+    "no": "No",
+    "exposureFrequencyLabel": "Exposure frequency",
+    "exposureFrequency": {
+      "veryFrequently": "Very frequently (almost every month)",
+      "frequently": "Frequently (at least twice a year)",
+      "rarely": "Rarely (at least once a year)",
+      "veryRare": "Very rare (at least once during working career)",
+      "never": "Never"
+    },
+    "yearsInvolvedLabel": "Years involved",
+    "yearsInvolved": {
+      "lessThan5": "< 5 years",
+      "from5to10": "5-10 years",
+      "from10to15": "10-15 years",
+      "moreThan15": ">15 years"
+    },
+    "otherPlaceholder": "Please specify",
+    "submit": "Submit",
+    "validationError": "Some information is missing or incorrectly entered. Please complete all fields.",
+    "submit": "Submit",
+    "edit": "Edit",
+    "save": "Save"
   }
 }

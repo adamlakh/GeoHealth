@@ -21,7 +21,7 @@ export class EvaluatorProfileService {
    * Can only be called once per user.
    */
   public saveProfile(evaluatorProfileDto: SaveEvaluatorProfileDto): Observable<ResponseEvaluatorProfileDto> {
-    return this.httpClient.post(
+    return this.httpClient.post<ResponseEvaluatorProfileDto>(
       `${this.baseUrl}${API_ENDPOINTS.EVALUATORPROFILE.SAVE}`,
       evaluatorProfileDto,
       { withCredentials: true }
@@ -44,6 +44,17 @@ export class EvaluatorProfileService {
   public getProfile(): Observable<ResponseEvaluatorProfileDto> {
     return this.httpClient.get<ResponseEvaluatorProfileDto>(
       `${this.baseUrl}${API_ENDPOINTS.EVALUATORPROFILE.GETPROFILE}`,
+      { withCredentials: true }
+    );
+  }
+
+  /**
+   * Update the connected user's existing evaluator profile.
+   */
+  public updateProfile(evaluatorProfileDto: SaveEvaluatorProfileDto): Observable<ResponseEvaluatorProfileDto> {
+    return this.httpClient.put<ResponseEvaluatorProfileDto>(
+      `${this.baseUrl}${API_ENDPOINTS.EVALUATORPROFILE.UPDATE}`,
+      evaluatorProfileDto,
       { withCredentials: true }
     );
   }

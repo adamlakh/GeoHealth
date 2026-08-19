@@ -101,4 +101,14 @@ public class EvaluatorProfile {
     public String getDivisions() { return divisions; }
     public DiseaseExperience getRvfExperience() { return rvfExperience; }
     public DiseaseExperience getEvdExperience() { return evdExperience; }
+
+    public void setProfessions(List<String> professions) { this.professions = professions; }
+    public void setSectors(List<String> sectors) { this.sectors = sectors; }
+    public void setInterventionLevels(List<String> interventionLevels) { this.interventionLevels = interventionLevels; }
+    public void setSectorsWorkedIn(List<String> sectorsWorkedIn) { this.sectorsWorkedIn = sectorsWorkedIn; }
+    public void setCountries(String countries) { this.countries = countries; }
+    public void setRegions(String regions) { this.regions = regions; }
+    public void setDivisions(String divisions) { this.divisions = divisions; }
+    public void setRvfExperience(DiseaseExperience rvfExperience) { this.rvfExperience = rvfExperience; }
+    public void setEvdExperience(DiseaseExperience evdExperience) { this.evdExperience = evdExperience; }
 }

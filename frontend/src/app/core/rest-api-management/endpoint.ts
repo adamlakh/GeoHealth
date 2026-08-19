@@ -70,7 +70,8 @@ export const API_ENDPOINTS = {
   EVALUATORPROFILE: {
     SAVE: "/evaluatorProfile/save",
     HASPROFILE: "/evaluatorProfile/hasProfile",
-    GETPROFILE: "/evaluatorProfile/getProfile"
+    GETPROFILE: "/evaluatorProfile/getProfile",
+    UPDATE: "/evaluatorProfile/update"
   },
   REPORT: {
     GET:"/report/getReport"
