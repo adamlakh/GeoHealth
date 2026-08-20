@@ -335,7 +335,7 @@
     },
     "otherPlaceholder": "Veuillez préciser",
     "submit": "Soumettre",
-    "validationError": "Certaines informations sont manquantes ou mal renseignées. Veuillez compléter tous les champs.",
+    "validationError": "Certaines informations sont manquantes ou mal renseignées. Veuillez compléter correctement tous les champs.",
     "submit": "Soumettre",
     "edit": "Modifier",
     "save": "Enregistrer"

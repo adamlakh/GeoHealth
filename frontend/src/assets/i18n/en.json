@@ -336,7 +336,7 @@
     },
     "otherPlaceholder": "Please specify",
     "submit": "Submit",
-    "validationError": "Some information is missing or incorrectly entered. Please complete all fields.",
+    "validationError": "Some information is missing or incorrect. Please fill in all fields correctly.",
     "submit": "Submit",
     "edit": "Edit",
     "save": "Save"

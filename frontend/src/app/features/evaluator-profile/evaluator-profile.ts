@@ -95,10 +95,10 @@ export class EvaluatorProfile implements OnInit {
     yearsInvolved: string;
   }): boolean {
     return (
-      experience.pathogenKnowledgeScore !== null &&
-      experience.transmissionKnowledgeScore !== null &&
-      experience.animalClinicalKnowledgeScore !== null &&
-      experience.humanClinicalKnowledgeScore !== null &&
+      this.isValidScore(experience.pathogenKnowledgeScore) &&
+      this.isValidScore(experience.transmissionKnowledgeScore) &&
+      this.isValidScore(experience.animalClinicalKnowledgeScore) &&
+      this.isValidScore(experience.humanClinicalKnowledgeScore) &&
       experience.professionallyExposed !== '' &&
       experience.exposureFrequency !== '' &&
       experience.yearsInvolved !== ''
@@ -216,5 +216,10 @@ export class EvaluatorProfile implements OnInit {
       },
       error: (err) => console.error('Error while loading evaluator profile', err),
     });
+  }
+
+
+  private isValidScore(score: number | null): boolean {
+    return score !== null && score >= 0 && score <= 10;
   }
 }
