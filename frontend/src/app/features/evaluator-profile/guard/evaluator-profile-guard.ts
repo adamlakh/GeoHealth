@@ -1,29 +1,36 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject, PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
-import {catchError, map, of} from 'rxjs';
+import {catchError, map, of, switchMap} from 'rxjs';
 import {EvaluatorProfileService} from '../../../core/service/EvaluatorProfileService/EvaluatorProfileService';
+import {UsersServices} from '../../../core/service/UserService/users-services';
 
 /**
  * Guard that checks if the connected user has already completed their evaluator profile.
- * If not, redirect to the evaluator-profile page instead of letting them access the route.
+ * Admins and superadmins are never redirected, even without a profile.
  */
 export const evaluatorProfileGuard: CanActivateFn = () => {
   const platformId = inject(PLATFORM_ID);
   const evaluatorProfileService = inject(EvaluatorProfileService);
+  const usersServices = inject(UsersServices);
   const router = inject(Router);
 
   if (!isPlatformBrowser(platformId)) {
     return true;
   }
 
-  return evaluatorProfileService.hasProfile().pipe(
-    map(hasProfile => {
-      if (!hasProfile) {
-        router.navigate(['evaluator-profile']);
-      }
-      return hasProfile;
-    }),
+  return usersServices.getConnectedUser().pipe(
+    switchMap(user =>
+      evaluatorProfileService.hasProfile().pipe(
+        map(hasProfile => {
+          const isAdmin = user.role === 'ADMIN' || user.role === 'SUPERADMIN';
+          if (!hasProfile && !isAdmin) {
+            router.navigate(['evaluator-profile']);
+          }
+          return true;
+        })
+      )
+    ),
     catchError(() => {
       router.navigate(['evaluator-profile']);
       return of(false);
