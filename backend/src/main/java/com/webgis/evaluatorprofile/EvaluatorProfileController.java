@@ -10,7 +10,13 @@ import com.webgis.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -23,7 +29,10 @@ public class EvaluatorProfileController {
     private final CookieService cookieService;
     private final UserService userService;
 
-    public EvaluatorProfileController(EvaluatorProfileService evaluatorProfileService, JwtService jwtService, CookieService cookieService, UserService userService) {
+    public EvaluatorProfileController(EvaluatorProfileService evaluatorProfileService,
+                                      JwtService jwtService,
+                                      CookieService cookieService,
+                                      UserService userService) {
         this.evaluatorProfileService = evaluatorProfileService;
         this.jwtService = jwtService;
         this.cookieService = cookieService;

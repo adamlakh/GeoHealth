@@ -83,7 +83,8 @@ public class EvaluationFormController {
         final User user= optionalUser.get();
 
         if (!evaluatorProfileService.hasProfile(user)) {
-            return ResponseEntity.status(403).body(new MessageDto("You must complete your evaluator profile before submitting evaluations"));
+            return ResponseEntity.status(403)
+                    .body(new MessageDto("You must complete your evaluator profile before submitting evaluations"));
         }
 
         final FinalMap finalMap= optionalFinalMap.get();
