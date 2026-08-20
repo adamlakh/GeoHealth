@@ -144,8 +144,26 @@ select {
   h2 {
     max-width: 100%;
   }
+
   label {
     flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  /* Labels with text + a field (input/select) stack vertically */
+  label:not(:has(input[type="checkbox"])) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    max-width: 40%;
+    width: 40%;
+    max-height: 5%;
+    height: 5%;
   }
 }
 
