@@ -339,6 +339,8 @@
     "validationError": "Some information is missing or incorrect. Please fill in all fields correctly.",
     "submit": "Submit",
     "edit": "Edit",
-    "save": "Save"
+    "save": "Save",
+    "saveSuccess": "Profile saved successfully.",
+    "completeProfilePrompt": "Please complete your evaluator profile to access the maps."
   }
 }

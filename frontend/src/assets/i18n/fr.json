@@ -338,6 +338,8 @@
     "validationError": "Certaines informations sont manquantes ou mal renseignées. Veuillez compléter correctement tous les champs.",
     "submit": "Soumettre",
     "edit": "Modifier",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "saveSuccess": "Profil enregistré avec succès.",
+    "completeProfilePrompt": "Veuillez compléter votre profil d'évaluateur pour accéder aux cartes."
   }
 }

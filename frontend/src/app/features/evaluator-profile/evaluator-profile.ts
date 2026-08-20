@@ -30,7 +30,9 @@ export class EvaluatorProfile implements OnInit {
   divisions = '';
 
   showValidationError = false;
+  showSuccessMessage = false;
   hasExistingProfile = false;
+  showProfileRequiredPopup = false;
   isEditing = true;
 
   rvfExperience = {
@@ -64,6 +66,7 @@ export class EvaluatorProfile implements OnInit {
       next: (hasProfile) => {
         this.hasExistingProfile = hasProfile;
         this.isEditing = !hasProfile;
+        this.showProfileRequiredPopup = !hasProfile;
         if (hasProfile) {
           this.loadExistingProfile();
         }
@@ -183,6 +186,8 @@ export class EvaluatorProfile implements OnInit {
       this.evaluatorProfileService.updateProfile(dto).subscribe({
         next: () => {
           this.isEditing = false;
+          this.showSuccessMessage = true;
+          this.cdr.detectChanges();
           console.log('Evaluator profile updated successfully');
         },
         error: (err) => console.error('Error while updating evaluator profile', err),
@@ -190,6 +195,10 @@ export class EvaluatorProfile implements OnInit {
     } else {
       this.evaluatorProfileService.saveProfile(dto).subscribe({
         next: () => {
+          this.hasExistingProfile = true;
+          this.isEditing = false;
+          this.showSuccessMessage = true;
+          this.cdr.detectChanges();
           console.log('Evaluator profile saved successfully');
         },
         error: (err) => console.error('Error while saving evaluator profile', err),
@@ -220,6 +229,10 @@ export class EvaluatorProfile implements OnInit {
 
 
   private isValidScore(score: number | null): boolean {
-    return score !== null && score >= 0 && score <= 10;
+    return score !== null && score > 0 && score <= 10;
+  }
+
+  closeProfileRequiredPopup(): void {
+    this.showProfileRequiredPopup = false;
   }
 }

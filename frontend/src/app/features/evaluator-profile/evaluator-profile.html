@@ -1,3 +1,7 @@
+@if (!hasExistingProfile) {
+<p class="info-message">{{ 'evaluatorProfile.completeProfilePrompt' | transloco }}</p>
+}
+
 <h1>{{ 'evaluatorProfile.title' | transloco }}</h1>
 
 <h2>{{ 'evaluatorProfile.generalProfileTitle' | transloco }}</h2>
@@ -145,6 +149,10 @@
 <br>
 @if (showValidationError) {
 <p class="validation-error">{{ 'evaluatorProfile.validationError' | transloco }}</p>
+}
+
+@if (showSuccessMessage) {
+<p class="success-message">{{ 'evaluatorProfile.saveSuccess' | transloco }}</p>
 }
 
 @if (hasExistingProfile && !isEditing) {
