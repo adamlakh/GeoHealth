@@ -1,0 +1,164 @@
+@if (!hasExistingProfile) {
+<p class="info-message">{{ 'evaluatorProfile.completeProfilePrompt' | transloco }}</p>
+}
+
+<h1>{{ 'evaluatorProfile.title' | transloco }}</h1>
+
+<h2>{{ 'evaluatorProfile.generalProfileTitle' | transloco }}</h2>
+
+<div>
+  <label>{{ 'evaluatorProfile.professionsLabel' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Medical doctor')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Medical doctor', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.medicalDoctor' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Medical nurse')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Medical nurse', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.medicalNurse' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Medical laboratory technician')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Medical laboratory technician', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.medicalLabTech' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Veterinary doctor')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Veterinary doctor', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.veterinaryDoctor' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Veterinary nurse')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Veterinary nurse', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.veterinaryNurse' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Veterinary laboratory technician')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Veterinary laboratory technician', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.veterinaryLabTech' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Zootechnician')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Zootechnician', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.zootechnician' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Agricultural engineer')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Agricultural engineer', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.agriculturalEngineer' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Wildlife officer')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Wildlife officer', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.wildlifeOfficer' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Animal health authority/Policy maker')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Animal health authority/Policy maker', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.animalHealthAuthority' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Public health authority/Policy maker')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Public health authority/Policy maker', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.publicHealthAuthority' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Researcher')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Researcher', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.researcher' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Lecturer/Teacher')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Lecturer/Teacher', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.lecturer' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedProfessions.includes('Other')" [disabled]="!isEditing" (change)="toggle(selectedProfessions, 'Other', $any($event.target).checked)"> {{ 'evaluatorProfile.professions.other' | transloco }}</label><br>
+  @if (selectedProfessions.includes('Other')) {
+  <input type="text" [(ngModel)]="otherProfession" name="otherProfession" [placeholder]="'evaluatorProfile.otherPlaceholder' | transloco">
+  }
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.sectorsLabel' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectors.includes('Public')" [disabled]="!isEditing" (change)="toggle(selectedSectors, 'Public', $any($event.target).checked)"> {{ 'evaluatorProfile.sectors.public' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectors.includes('Private')" [disabled]="!isEditing" (change)="toggle(selectedSectors, 'Private', $any($event.target).checked)"> {{ 'evaluatorProfile.sectors.private' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectors.includes('Both')" [disabled]="!isEditing" (change)="toggle(selectedSectors, 'Both', $any($event.target).checked)"> {{ 'evaluatorProfile.sectors.both' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectors.includes('Other')" [disabled]="!isEditing" (change)="toggle(selectedSectors, 'Other', $any($event.target).checked)"> {{ 'evaluatorProfile.sectors.other' | transloco }}</label><br>
+  @if (selectedSectors.includes('Other')) {
+  <input type="text" [(ngModel)]="otherSector" name="otherSector" [placeholder]="'evaluatorProfile.otherPlaceholder' | transloco">
+  }
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.interventionLevelsLabel' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedInterventionLevels.includes('National')" [disabled]="!isEditing" (change)="toggle(selectedInterventionLevels, 'National', $any($event.target).checked)"> {{ 'evaluatorProfile.interventionLevels.national' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedInterventionLevels.includes('Regional')" [disabled]="!isEditing" (change)="toggle(selectedInterventionLevels, 'Regional', $any($event.target).checked)"> {{ 'evaluatorProfile.interventionLevels.regional' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedInterventionLevels.includes('Divisional level')" [disabled]="!isEditing" (change)="toggle(selectedInterventionLevels, 'Divisional level', $any($event.target).checked)"> {{ 'evaluatorProfile.interventionLevels.divisional' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedInterventionLevels.includes('Health District')" [disabled]="!isEditing" (change)="toggle(selectedInterventionLevels, 'Health District', $any($event.target).checked)"> {{ 'evaluatorProfile.interventionLevels.healthDistrict' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedInterventionLevels.includes('Other')" [disabled]="!isEditing" (change)="toggle(selectedInterventionLevels, 'Other', $any($event.target).checked)"> {{ 'evaluatorProfile.interventionLevels.other' | transloco }}</label><br>
+  @if (selectedInterventionLevels.includes('Other')) {
+  <input type="text" [(ngModel)]="otherInterventionLevel" name="otherInterventionLevel" [placeholder]="'evaluatorProfile.otherPlaceholder' | transloco">
+  }
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.sectorsWorkedInLabel' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Livestock')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Livestock', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.livestock' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Agriculture')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Agriculture', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.agriculture' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Public health')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Public health', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.publicHealth' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Wildlife')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Wildlife', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.wildlife' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Forests')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Forests', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.forests' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Environmental')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Environmental', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.environmental' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Public administration- Political decision-maker')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Public administration- Political decision-maker', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.publicAdministration' | transloco }}</label><br>
+  <label><input type="checkbox" [checked]="selectedSectorsWorkedIn.includes('Other')" [disabled]="!isEditing" (change)="toggle(selectedSectorsWorkedIn, 'Other', $any($event.target).checked)"> {{ 'evaluatorProfile.sectorsWorkedIn.other' | transloco }}</label><br>
+  @if (selectedSectorsWorkedIn.includes('Other')) {
+  <input type="text" [(ngModel)]="otherSectorWorkedIn" name="otherSectorWorkedIn" [placeholder]="'evaluatorProfile.otherPlaceholder' | transloco">
+  }
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.locationLabel' | transloco }}</label><br>
+  <label>{{ 'evaluatorProfile.country' | transloco }}: <input type="text" [(ngModel)]="countries" name="countries" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.region' | transloco }}: <input type="text" [(ngModel)]="regions" name="regions" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.division' | transloco }}: <input type="text" [(ngModel)]="divisions" name="divisions" [disabled]="!isEditing"></label>
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.rvfTitle' | transloco }}</label><br>
+  <label>{{ 'evaluatorProfile.pathogenKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="rvfExperience.pathogenKnowledgeScore" name="rvfPathogen" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.transmissionKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="rvfExperience.transmissionKnowledgeScore" name="rvfTransmission" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.animalClinicalKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="rvfExperience.animalClinicalKnowledgeScore" name="rvfAnimalClinical" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.humanClinicalKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="rvfExperience.humanClinicalKnowledgeScore" name="rvfHumanClinical" [disabled]="!isEditing"></label><br>
+
+  <label>{{ 'evaluatorProfile.professionallyExposed' | transloco }}:
+    <select [(ngModel)]="rvfExperience.professionallyExposed" name="rvfExposed" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="yes">{{ 'evaluatorProfile.yes' | transloco }}</option>
+      <option value="no">{{ 'evaluatorProfile.no' | transloco }}</option>
+    </select>
+  </label><br>
+
+  <label>{{ 'evaluatorProfile.exposureFrequencyLabel' | transloco }}:
+    <select [(ngModel)]="rvfExperience.exposureFrequency" name="rvfFrequency" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="Very frequently (almost every month)">{{ 'evaluatorProfile.exposureFrequency.veryFrequently' | transloco }}</option>
+      <option value="Frequently (at least twice a year)">{{ 'evaluatorProfile.exposureFrequency.frequently' | transloco }}</option>
+      <option value="Rarely (at least once a year)">{{ 'evaluatorProfile.exposureFrequency.rarely' | transloco }}</option>
+      <option value="Very rare (at least once during working career)">{{ 'evaluatorProfile.exposureFrequency.veryRare' | transloco }}</option>
+      <option value="Never">{{ 'evaluatorProfile.exposureFrequency.never' | transloco }}</option>
+    </select>
+  </label><br>
+
+  <label>{{ 'evaluatorProfile.yearsInvolvedLabel' | transloco }}:
+    <select [(ngModel)]="rvfExperience.yearsInvolved" name="rvfYears" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="< 5 years">{{ 'evaluatorProfile.yearsInvolved.lessThan5' | transloco }}</option>
+      <option value="5-10 years">{{ 'evaluatorProfile.yearsInvolved.from5to10' | transloco }}</option>
+      <option value="10-15 years">{{ 'evaluatorProfile.yearsInvolved.from10to15' | transloco }}</option>
+      <option value=">15 years">{{ 'evaluatorProfile.yearsInvolved.moreThan15' | transloco }}</option>
+    </select>
+  </label>
+</div>
+
+<div>
+  <label>{{ 'evaluatorProfile.evdTitle' | transloco }}</label><br>
+  <label>{{ 'evaluatorProfile.pathogenKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="evdExperience.pathogenKnowledgeScore" name="evdPathogen" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.transmissionKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="evdExperience.transmissionKnowledgeScore" name="evdTransmission" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.animalClinicalKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="evdExperience.animalClinicalKnowledgeScore" name="evdAnimalClinical" [disabled]="!isEditing"></label><br>
+  <label>{{ 'evaluatorProfile.humanClinicalKnowledge' | transloco }}: <input type="number" min="1" max="10" [(ngModel)]="evdExperience.humanClinicalKnowledgeScore" name="evdHumanClinical" [disabled]="!isEditing"></label><br>
+
+  <label>{{ 'evaluatorProfile.professionallyExposed' | transloco }}:
+    <select [(ngModel)]="evdExperience.professionallyExposed" name="evdExposed" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="yes">{{ 'evaluatorProfile.yes' | transloco }}</option>
+      <option value="no">{{ 'evaluatorProfile.no' | transloco }}</option>
+    </select>
+  </label><br>
+
+  <label>{{ 'evaluatorProfile.exposureFrequencyLabel' | transloco }}:
+    <select [(ngModel)]="evdExperience.exposureFrequency" name="evdFrequency" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="Very frequently (almost every month)">{{ 'evaluatorProfile.exposureFrequency.veryFrequently' | transloco }}</option>
+      <option value="Frequently (at least twice a year)">{{ 'evaluatorProfile.exposureFrequency.frequently' | transloco }}</option>
+      <option value="Rarely (at least once a year)">{{ 'evaluatorProfile.exposureFrequency.rarely' | transloco }}</option>
+      <option value="Very rare (at least once during working career)">{{ 'evaluatorProfile.exposureFrequency.veryRare' | transloco }}</option>
+      <option value="Never">{{ 'evaluatorProfile.exposureFrequency.never' | transloco }}</option>
+    </select>
+  </label><br>
+
+  <label>{{ 'evaluatorProfile.yearsInvolvedLabel' | transloco }}:
+    <select [(ngModel)]="evdExperience.yearsInvolved" name="evdYears" [disabled]="!isEditing">
+      <option value="">--</option>
+      <option value="< 5 years">{{ 'evaluatorProfile.yearsInvolved.lessThan5' | transloco }}</option>
+      <option value="5-10 years">{{ 'evaluatorProfile.yearsInvolved.from5to10' | transloco }}</option>
+      <option value="10-15 years">{{ 'evaluatorProfile.yearsInvolved.from10to15' | transloco }}</option>
+      <option value=">15 years">{{ 'evaluatorProfile.yearsInvolved.moreThan15' | transloco }}</option>
+    </select>
+  </label>
+</div>
+
+<br>
+@if (showValidationError) {
+<p class="validation-error">{{ 'evaluatorProfile.validationError' | transloco }}</p>
+}
+
+@if (showSuccessMessage) {
+<p class="success-message">{{ 'evaluatorProfile.saveSuccess' | transloco }}</p>
+}
+
+@if (hasExistingProfile && !isEditing) {
+<button (click)="enableEdit()">{{ 'evaluatorProfile.edit' | transloco }}</button>
+} @else {
+<button (click)="submit()">
+  {{ (hasExistingProfile ? 'evaluatorProfile.save' : 'evaluatorProfile.submit') | transloco }}
+</button>
+}

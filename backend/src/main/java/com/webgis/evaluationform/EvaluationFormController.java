@@ -1,6 +1,7 @@
 package com.webgis.evaluationform;
 
 import com.webgis.MessageDto;
+import com.webgis.evaluatorprofile.EvaluatorProfileService;
 import com.webgis.map.finalmap.FinalMap;
 import com.webgis.map.finalmap.FinalMapService;
 import com.webgis.security.CookieService;
@@ -37,17 +38,20 @@ public class EvaluationFormController {
     private final CookieService cookieService;
     private final UserService userService;
     private final FinalMapService finalMapService;
+    private final EvaluatorProfileService evaluatorProfileService;
 
     public EvaluationFormController(EvaluationFormService evaluationFormService,
                                     JwtService jwtService,
                                     CookieService cookieService,
                                     UserService userService,
-                                    FinalMapService finalMapService) {
+                                    FinalMapService finalMapService,
+                                    EvaluatorProfileService evaluatorProfileService) {
         this.evaluationFormService = evaluationFormService;
         this.jwtService = jwtService;
         this.cookieService = cookieService;
         this.userService = userService;
         this.finalMapService=finalMapService;
+        this.evaluatorProfileService = evaluatorProfileService;
     }
 
     /**
@@ -77,6 +81,12 @@ public class EvaluationFormController {
         }
 
         final User user= optionalUser.get();
+
+        if (!evaluatorProfileService.hasProfile(user)) {
+            return ResponseEntity.status(403)
+                    .body(new MessageDto("You must complete your evaluator profile before submitting evaluations"));
+        }
+
         final FinalMap finalMap= optionalFinalMap.get();
 
         if(evaluationFormService.hasAlreadyAFormForDivisionForFinalMap(user, saveFormDto.division(),finalMap)){

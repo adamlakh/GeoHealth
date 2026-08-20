@@ -110,6 +110,11 @@
         </div>
         <div class="change-password-link">
           <p>{{ 'profile.password-message' | transloco }}<a (click)="goToChangePassword()">{{ 'profile.password-button' | transloco }}</a></p>
+          <app-button
+            [text]="'profile.evaluator-profile-button' | transloco"
+            variant="primary"
+            (clicked)="goToEvaluatorProfile()">
+          </app-button>
         </div>
 
     </div>
