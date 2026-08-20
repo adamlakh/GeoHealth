@@ -3,6 +3,7 @@ package com.webgis.evaluationform;
 import com.webgis.evaluationform.dto.ResponseEvaluationFormDto;
 import com.webgis.evaluationform.dto.SaveEvaluationFormDto;
 import com.webgis.evaluationform.dto.UpdateEvaluationFormDto;
+import com.webgis.evaluatorprofile.EvaluatorProfileService;
 import com.webgis.map.finalmap.FinalMap;
 import com.webgis.map.finalmap.FinalMapService;
 import com.webgis.security.CookieService;
@@ -50,6 +51,9 @@ class EvaluationFormControllerTest {
 
     @InjectMocks
     private EvaluationFormController controller;
+
+    @Mock
+    private EvaluatorProfileService evaluatorProfileService;
 
     private User user;
     private FinalMap finalMap;
@@ -107,6 +111,7 @@ class EvaluationFormControllerTest {
         when(cookieService.getJwtFromCookie(request)).thenReturn("token");
         when(jwtService.extractUsername("token")).thenReturn("pseudo");
         when(userService.findByUsername("pseudo")).thenReturn(Optional.of(user));
+        when(evaluatorProfileService.hasProfile(user)).thenReturn(true);
         when(finalMapService.findById(1L)).thenReturn(Optional.of(finalMap));
         when(evaluationFormService.hasAlreadyAFormForDivisionForFinalMap(user, "Djerem", finalMap)).thenReturn(false);
         when(evaluationFormService.saveForm(any(), any(), any(), any(), any(), eq(user), eq(finalMap), anyBoolean()))
@@ -126,6 +131,7 @@ class EvaluationFormControllerTest {
         when(cookieService.getJwtFromCookie(request)).thenReturn("token");
         when(jwtService.extractUsername("token")).thenReturn("pseudo");
         when(userService.findByUsername("pseudo")).thenReturn(Optional.of(user));
+        when(evaluatorProfileService.hasProfile(user)).thenReturn(true);
 
         SaveEvaluationFormDto dto = new SaveEvaluationFormDto(
                 "Djerem",
