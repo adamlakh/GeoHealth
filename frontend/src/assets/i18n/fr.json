@@ -78,7 +78,8 @@
     "account-second-title": "Veuillez saisir et valider votre mot de passe pour confirmer",
     "delete-forever-button": "Suppression définitive",
     "password-input": "Mot de passe",
-    "account-cancel-button": "Annuler"
+    "account-cancel-button": "Annuler",
+    "evaluator-profile-button": "Mes informations personnelles"
   },
   "password": {
     "title": "Modifier votre mot de passe",

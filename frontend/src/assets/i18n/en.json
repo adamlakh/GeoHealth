@@ -78,7 +78,8 @@
     "account-second-title": "Please type and validate your password to confirm",
     "delete-forever-button": "Delete forever",
     "password-input": "Password",
-    "account-cancel-button": "Cancel"
+    "account-cancel-button": "Cancel",
+    "evaluator-profile-button": "My personal information"
   },
   "password": {
     "title": " Update password ",
