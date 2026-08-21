@@ -119,13 +119,6 @@
             </button>
           }
 
-          @if(isAdmin){
-          <button
-            class="report-btn"
-            (click)="onUserReportButtonClicked()">
-            Test User Report
-          </button>
-          }
 
         </div>
 
@@ -218,10 +211,25 @@
   </app-evaluation-modal>
 }
 
+<!-- Modal evaluators -->
+@if(isAdmin && showEvaluatorsModal()) {
+<app-evaluators-modal
+  [mapId]="mapId"
+  (close)="onCloseEvaluatorsModal()"
+  (userSelected)="onEvaluatorSelected($event)">
+</app-evaluators-modal>
+}
+
 <!-- List of evaluations -->
 <div class="evaluation-section">
   <div class="evaluation-header">
     <h2>Evaluations</h2>
+
+    @if(isAdmin){
+    <button class="report-btn" (click)="onUserReportButtonClicked()">
+      {{ 'map.userReport' | transloco }}
+    </button>
+    }
   </div>
   @if(selectedDivision()) {
   <div class="evaluation-list">

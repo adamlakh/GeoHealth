@@ -1,0 +1,16 @@
+<div cdkDrag class="evaluators-modal">
+  <div class="modal-header" cdkDragHandle>
+    <h2>Select a user</h2>
+    <button class="close-btn" (click)="onClose()">×</button>
+  </div>
+  <div class="modal-content">
+    <p class="empty-hint" *ngIf="evaluators.length === 0">No evaluations for this map yet.</p>
+    <ul class="evaluator-list" *ngIf="evaluators.length > 0">
+      <li *ngFor="let user of evaluators">
+        <button class="evaluator-item" (click)="onSelectUser(user)">
+          <span class="evaluator-name">{{ user.username }}</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

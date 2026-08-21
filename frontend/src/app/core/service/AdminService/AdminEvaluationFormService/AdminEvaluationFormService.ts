@@ -40,13 +40,13 @@ export class AdminEvaluationFormService {
   public deleteForm(evaluationFormId:number):Observable<MessageDto>{
     return this.httpClient.delete<MessageDto>(
       `${this.baseUrl}${API_ENDPOINTS.ADMIN.EVALUATIONFORM.DELETEFORM}/${evaluationFormId}`,
-      {withCredentials:true}  
+      {withCredentials:true}
     );
   }
 
   public getEvaluators(finalMapId: number) : Observable<UserSummaryDto[]> {
     return this.httpClient.get<UserSummaryDto[]>(
-      `${this.baseUrl}${API_ENDPOINTS.ADMIN.REPORT.GETEVALUATORS}/${finalMapId}`,
+      `${this.baseUrl}${API_ENDPOINTS.REPORT.GETEVALUATORS}/${finalMapId}`,
       {withCredentials:true}
     );
   }

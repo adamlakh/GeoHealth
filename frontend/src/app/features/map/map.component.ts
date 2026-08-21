@@ -31,11 +31,12 @@ import {
 } from '../../core/service/MeasureService/ModelEvaluationMeasureService/modelEvaluationMeasureService';
 import {FormsModule} from '@angular/forms';
 import {ReportService} from '../../core/service/ReportService/reportService';
-
+import {EvaluatorsModalComponent} from './evaluators-modal/evaluators-modal';
+import {UserSummaryDto} from '../../shared/models/AdminModel/UserModel/UserSummaryDto';
 
 @Component({
   selector: 'app-map',
-  imports: [RouterModule, CommonModule, TranslocoPipe, MapLegendComponent, TooltipDescriptionComponent, ButtonComponent, EvaluationModalComponent, EvaluationCommentComponent, FormsModule],
+  imports: [RouterModule, CommonModule, TranslocoPipe, MapLegendComponent, TooltipDescriptionComponent, ButtonComponent, EvaluationModalComponent, EvaluatorsModalComponent, EvaluationCommentComponent, FormsModule],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css',
   standalone: true,
@@ -67,6 +68,8 @@ export class MapComponent implements AfterViewInit {
 
   // helper class managing the Leaflet map layers and interactions
   public mapHelper = new MapLayerHelper();
+
+  showEvaluatorsModal = signal<boolean>(false);
 
   inspectModeActive : boolean = false;
 
@@ -447,27 +450,19 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-
-  /**
-   * TEST ONLY: prompts for a userId and downloads that user's report
-   */
   onUserReportButtonClicked(): void {
-    const userIdInput = window.prompt('Enter user ID:');
-    if (!userIdInput) {
-      return;
-    }
-    const userId = Number(userIdInput);
-    if (isNaN(userId)) {
-      console.error('Invalid user id');
-      return;
-    }
+    this.showEvaluatorsModal.set(true);
+  }
 
-    this.reportService.getUserReport(this.mapId, userId).subscribe({
+  onEvaluatorSelected(user: UserSummaryDto): void {
+    this.showEvaluatorsModal.set(false);
+
+    this.reportService.getUserReport(this.mapId, user.id).subscribe({
       next: (blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         const urlProxy = document.createElement('a');
         urlProxy.href = url;
-        urlProxy.download = `user-report-${userId}.xlsx`;
+        urlProxy.download = `user-report-${user.username}.xlsx`;
         urlProxy.click();
         window.URL.revokeObjectURL(url);
         console.log('User report successfully downloaded');
@@ -476,6 +471,10 @@ export class MapComponent implements AfterViewInit {
         console.error('Failed to generate user report', err);
       }
     });
+  }
+
+  onCloseEvaluatorsModal(): void {
+    this.showEvaluatorsModal.set(false);
   }
 
 }

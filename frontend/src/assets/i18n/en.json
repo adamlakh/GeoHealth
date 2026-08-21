@@ -174,7 +174,8 @@
     "drawingMode": "Drawing mode",
     "evaluationHint": "Select a division to see its evaluations",
     "clickZone": "Click a zone to inspect its value",
-    "report":  "Create report",
+    "report":  "Metrics report",
+    "userReport": "Users report",
     "clickDivision" :  "Click on a division to see its metrics"
   },
   "navbar": {
