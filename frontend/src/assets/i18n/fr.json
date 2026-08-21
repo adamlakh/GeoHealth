@@ -174,7 +174,8 @@
     "drawingMode": "Mode dessin",
     "evaluationHint": "Sélectionnez un département pour voir ses évaluations",
     "clickZone": "Cliquez sur une zone pour inspecter sa valeur",
-    "report":  "Créer un rapport",
+    "report":  "Rapport de métriques",
+    "userReport": "Rapport utilisateurs",
     "clickDivision" :  "Cliquez sur un département pour voir ses métriques"
   },
   "navbar": {

@@ -217,6 +217,7 @@
 
 
 .evaluation-header {
+  position: relative;
   padding: 12px 16px;
   background: linear-gradient(135deg, #6aab3a 0%, #90c97a 100%);
 }
@@ -227,6 +228,14 @@
   color: white;
   margin: 0;
   text-align: center;
+}
+
+.evaluation-header .report-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0;
 }
 
 .evaluation-hint {

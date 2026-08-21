@@ -31,4 +31,25 @@ export class ReportService{
       { withCredentials: true,
         responseType:'blob'})
   }
+
+  /**
+   * Get the .xlsx report for a specific user on a specific map
+   */
+  public getUserReport(mapId: number, userId: number): Observable<any> {
+    return this.httpClient.get(
+      `${this.baseUrl}${API_ENDPOINTS.REPORT.GETUSERREPORT}/${mapId}/${userId}`,
+      {withCredentials: true, responseType: 'blob'}
+    );
+  }
+
+    /**
+     * Get the .xlsx report containing a user's profile
+     */
+    public getUserProfile(userId: number): Observable<any> {
+      return this.httpClient.get(
+        `${this.baseUrl}${API_ENDPOINTS.REPORT.GETUSERPROFILE}/${userId}`,
+        {withCredentials: true, responseType: 'blob'}
+      );
+    }
+
 }

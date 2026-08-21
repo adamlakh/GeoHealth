@@ -190,4 +190,16 @@ public class EvaluationFormService {
         return evaluationFormRepository.countByFinalMapAndDivisionAndIsPublicTrue(finalMap, division);
     }
 
+    /**
+     * Get all evaluation forms submitted by a specific user for a specific map
+     *
+     * @param finalMap the map you are interested in
+     * @param user the user you are interested in
+     *
+     * @return a list of all evaluation forms the user submitted for that map (one per division at most)
+     */
+    public List<EvaluationForm> getAllFormForFinalMapAndUser(FinalMap finalMap, User user){
+        return evaluationFormRepository.findByFinalMapAndUser(finalMap, user);
+    }
+
 }

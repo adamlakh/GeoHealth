@@ -13,6 +13,7 @@ public interface EvaluationFormRepository extends JpaRepository<EvaluationForm,I
     Optional<EvaluationForm> findById(long id);
 
     List<EvaluationForm> findByFinalMap(FinalMap finalMap);
+    List<EvaluationForm> findByFinalMapAndUser(FinalMap finalMap, User user);
 
     List<EvaluationForm>
     findByFinalMapAndDivisionAndPerceivedRiskIsNotNullAndCertaintyLevelIsNotNullAndIsPublicTrue(
