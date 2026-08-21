@@ -2,6 +2,7 @@ package com.webgis.admin.user;
 
 import com.webgis.MessageDto;
 import com.webgis.admin.dto.user.UserSummaryDto;
+import com.webgis.admin.report.ExcelReportService;
 import com.webgis.evaluationform.EvaluationForm;
 import com.webgis.evaluationform.EvaluationFormService;
 import com.webgis.map.finalmap.FinalMap;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,16 +30,19 @@ public class AdminReportController {
     private final UserService userService;
     private final FinalMapService finalMapService;
     private final EvaluationFormService evaluationFormService;
+    private final ExcelReportService excelReportService;
 
 
 
     public AdminReportController(
             UserService userService,
             FinalMapService finalMapService,
-            EvaluationFormService evaluationFormService){
+            EvaluationFormService evaluationFormService,
+            ExcelReportService excelReportService){
         this.userService = userService;
         this.finalMapService = finalMapService;
         this.evaluationFormService = evaluationFormService;
+        this.excelReportService = excelReportService;
     }
 
     /**
@@ -63,20 +68,15 @@ public class AdminReportController {
 
         final List<EvaluationForm> evaluationForms = evaluationFormService.getAllFormForFinalMapAndUser(finalMap, user);
 
-        System.out.println("Found " + evaluationForms.size() + " evaluation forms for user " + userId + " on map " + mapId);
-        for (EvaluationForm form : evaluationForms) {
-            System.out.println("heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-            System.out.println(
-                    "division=" + form.getDivision()
-                            + " | agreementLevel=" + form.getAgreementLevel()
-                            + " | perceivedRisk=" + form.getPerceivedRisk()
-                            + " | certaintyLevel=" + form.getCertaintyLevel()
-                            + " | comment=" + form.getComment()
-                            + " | isPublic=" + form.isPublic()
-            );
+        try {
+            final byte[] excelBytes = excelReportService.generateUserReport(evaluationForms);
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=user-report.xlsx")
+                    .header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    .body(excelBytes);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(new MessageDto("Failed to generate report"));
         }
-
-        return ResponseEntity.ok("done");
     }
 
     @GetMapping("/getEvaluators/{mapId}")

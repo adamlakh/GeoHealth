@@ -462,7 +462,7 @@ export class MapComponent implements AfterViewInit {
         const url = window.URL.createObjectURL(blob);
         const urlProxy = document.createElement('a');
         urlProxy.href = url;
-        urlProxy.download = `user-report-${user.username}.xlsx`;
+        urlProxy.download = `report-${user.username}-${this.mapTitle()}.xlsx`;
         urlProxy.click();
         window.URL.revokeObjectURL(url);
         console.log('User report successfully downloaded');
