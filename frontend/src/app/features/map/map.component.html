@@ -118,6 +118,15 @@
               {{ 'map.report' | transloco }}
             </button>
           }
+
+          @if(isAdmin){
+          <button
+            class="report-btn"
+            (click)="onUserReportButtonClicked()">
+            Test User Report
+          </button>
+          }
+
         </div>
 
         <div class="metrics-body">

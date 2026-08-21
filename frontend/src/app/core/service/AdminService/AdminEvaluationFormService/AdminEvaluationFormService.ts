@@ -5,6 +5,7 @@ import {API_ENDPOINTS} from '../../../rest-api-management/endpoint';
 import {Observable} from 'rxjs';
 import {AdminResponseEvaluationFormDto} from '../../../../shared/models/AdminModel/EvaluationFormModel/AdminResponseEvaluationFormDto';
 import {MessageDto} from '../../../../shared/models/MessageDto'
+import {UserSummaryDto} from '../../../../shared/models/AdminModel/UserModel/UserSummaryDto';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,13 @@ export class AdminEvaluationFormService {
   public deleteForm(evaluationFormId:number):Observable<MessageDto>{
     return this.httpClient.delete<MessageDto>(
       `${this.baseUrl}${API_ENDPOINTS.ADMIN.EVALUATIONFORM.DELETEFORM}/${evaluationFormId}`,
+      {withCredentials:true}  
+    );
+  }
+
+  public getEvaluators(finalMapId: number) : Observable<UserSummaryDto[]> {
+    return this.httpClient.get<UserSummaryDto[]>(
+      `${this.baseUrl}${API_ENDPOINTS.ADMIN.REPORT.GETEVALUATORS}/${finalMapId}`,
       {withCredentials:true}
     );
   }

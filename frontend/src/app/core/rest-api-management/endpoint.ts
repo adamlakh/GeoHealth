@@ -74,6 +74,8 @@ export const API_ENDPOINTS = {
     UPDATE: "/evaluatorProfile/update"
   },
   REPORT: {
-    GET:"/report/getReport"
+    GET:"/report/getReport",
+    GETUSERREPORT:"/admin/getUserReport",
+    GETEVALUATORS:"/admin/getEvaluators"
   }
 } as const;

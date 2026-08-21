@@ -446,4 +446,36 @@ export class MapComponent implements AfterViewInit {
       }
     });
   }
+
+
+  /**
+   * TEST ONLY: prompts for a userId and downloads that user's report
+   */
+  onUserReportButtonClicked(): void {
+    const userIdInput = window.prompt('Enter user ID:');
+    if (!userIdInput) {
+      return;
+    }
+    const userId = Number(userIdInput);
+    if (isNaN(userId)) {
+      console.error('Invalid user id');
+      return;
+    }
+
+    this.reportService.getUserReport(this.mapId, userId).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const urlProxy = document.createElement('a');
+        urlProxy.href = url;
+        urlProxy.download = `user-report-${userId}.xlsx`;
+        urlProxy.click();
+        window.URL.revokeObjectURL(url);
+        console.log('User report successfully downloaded');
+      },
+      error: (err) => {
+        console.error('Failed to generate user report', err);
+      }
+    });
+  }
+
 }
