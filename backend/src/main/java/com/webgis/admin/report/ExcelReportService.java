@@ -37,7 +37,7 @@ public class ExcelReportService {
      */
     public byte[] generateUserReport(List<EvaluationForm> evaluationForms) throws IOException {
 
-        List<Field> fields = Arrays.stream(EvaluationForm.class.getDeclaredFields())
+        final List<Field> fields = Arrays.stream(EvaluationForm.class.getDeclaredFields())
                 .filter(f -> !f.getName().equals("user") && !f.getName().equals("finalMap"))
                 .toList();
         fields.forEach(f -> f.setAccessible(true));
@@ -46,21 +46,21 @@ public class ExcelReportService {
             Workbook workbook = new XSSFWorkbook();
             ByteArrayOutputStream out = new ByteArrayOutputStream())
         {
-            Sheet sheet = workbook.createSheet("Report");
+            final Sheet sheet = workbook.createSheet("Report");
 
-            Row headerRow = sheet.createRow(0);
+            final Row headerRow = sheet.createRow(0);
             for (int i = 0; i < fields.size(); i++) {
                 headerRow.createCell(i).setCellValue(fields.get(i).getName());
             }
 
             int rowIndex = 1;
             for (EvaluationForm form : evaluationForms) {
-                Row row = sheet.createRow(rowIndex);
+                final Row row = sheet.createRow(rowIndex);
                 rowIndex++;
 
                 for (int i = 0; i < fields.size(); i++) {
                     try {
-                        Object value = fields.get(i).get(form);
+                        final Object value = fields.get(i).get(form);
                         if (value != null) {
                             row.createCell(i).setCellValue(value.toString());
                         }
