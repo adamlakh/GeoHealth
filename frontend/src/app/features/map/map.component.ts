@@ -471,6 +471,21 @@ export class MapComponent implements AfterViewInit {
         console.error('Failed to generate user report', err);
       }
     });
+
+    this.reportService.getUserProfile(user.id).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const urlProxy = document.createElement('a');
+        urlProxy.href = url;
+        urlProxy.download = `profile-${user.username}.xlsx`;
+        urlProxy.click();
+        window.URL.revokeObjectURL(url);
+        console.log('User profile successfully downloaded');
+      },
+      error: (err) => {
+        console.error('Failed to generate user profile', err);
+      }
+    });
   }
 
   onCloseEvaluatorsModal(): void {

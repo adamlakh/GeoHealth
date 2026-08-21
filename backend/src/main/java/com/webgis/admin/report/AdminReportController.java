@@ -79,6 +79,27 @@ public class AdminReportController {
         }
     }
 
+    @GetMapping("getUserProfileReport/{userId}")
+    public ResponseEntity<Object> getUserProfileReport(@PathVariable long userId) {
+        System.out.println("waaaaaaaaaaaaaaaaa");
+        final Optional<User> optionalUser = userService.findById(userId);
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(404).body(new MessageDto("The selected user does not exist"));
+        }
+
+        final User user = optionalUser.get();
+
+        try {
+            final byte[] excelBytes = excelReportService.generateUserProfile(user);
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=user-profile-report.xlsx")
+                    .header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    .body(excelBytes);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(new MessageDto("Failed to generate report"));
+        }
+    }
+
     @GetMapping("/getEvaluators/{mapId}")
     public ResponseEntity<Object> getEvaluators(@PathVariable long mapId) {
 
