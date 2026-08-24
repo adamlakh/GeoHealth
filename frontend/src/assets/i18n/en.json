@@ -131,7 +131,7 @@
     "comment": "Comment",
     "savechangesbutton": "Save changes",
     "savebutton": "Save",
-    "commentdescription": "You can add a free comment to justify your evaluation or provide contextual details. For example: missing data, recent events, local knowledge, perceived biases, unusual changes in the situation, etc.",
+    "commentdescription": "You can add a free comment to justify your evaluation or provide contextual details. e.g.: a risk factor that has not been taken into account, missing data, recent events, local knowledge, perceived biases, unusual changes in the situation, etc.",
     "placeholder" : "Enter your comment...",
     "firstoption": "high",
     "secondoption": "medium",
@@ -265,7 +265,7 @@
   "evaluatorProfile": {
     "title": "Evaluator Profile",
     "generalProfileTitle": "General profile",
-    "professionsLabel": "Profession(s):",
+    "professionsLabel": "What is your profession (Multiple answers possible): ",
     "professions": {
       "medicalDoctor": "Medical doctor",
       "medicalNurse": "Medical nurse",
@@ -282,14 +282,14 @@
       "lecturer": "Lecturer / Teacher",
       "other": "Other"
     },
-    "sectorsLabel": "Sector(s) of employment:",
+    "sectorsLabel": "What is your sector of employment? (Multiple answers possible):",
     "sectors": {
       "public": "Public",
       "private": "Private",
       "both": "Both",
       "other": "Other"
     },
-    "interventionLevelsLabel": "Level of intervention:",
+    "interventionLevelsLabel": "What is your level of intervention in the health pyramid (Multiple answers possible):  ",
     "interventionLevels": {
       "national": "National",
       "regional": "Regional",
@@ -297,7 +297,7 @@
       "healthDistrict": "Health District",
       "other": "Other"
     },
-    "sectorsWorkedInLabel": "Sector(s) you work in:",
+    "sectorsWorkedInLabel": "In which sectors do you work? (Multiple answers possible): ",
     "sectorsWorkedIn": {
       "livestock": "Livestock",
       "agriculture": "Agriculture",
@@ -308,20 +308,20 @@
       "publicAdministration": "Public administration - Political decision-maker",
       "other": "Other"
     },
-    "locationLabel": "Areas of professional practice",
+    "locationLabel": "Please indicate your areas of professional practice:  ",
     "country": "Country",
     "region": "Region",
     "division": "Division",
-    "rvfTitle": "Rift Valley Fever experience",
-    "evdTitle": "Ebola Virus Disease experience",
-    "pathogenKnowledge": "Pathogen knowledge (1-10)",
-    "transmissionKnowledge": "Transmission knowledge (1-10)",
-    "animalClinicalKnowledge": "Animal clinical knowledge (1-10)",
-    "humanClinicalKnowledge": "Human clinical knowledge (1-10)",
-    "professionallyExposed": "Professionally exposed",
+    "rvfTitle": "For Rift Valley Fever on a scale of 1-10, how would you rate yourself in the following areas? ",
+    "evdTitle": "For Ebola Virus Disease on a scale of 1-10, how would you rate yourself in the following areas? ",
+    "pathogenKnowledge": "Knowledge of the biology (pathogenesis/infectivity) of the pathogen (1-10)",
+    "transmissionKnowledge": "Knowledge of the mechanisms by which pathogens are transmitted to hosts (1-10)",
+    "animalClinicalKnowledge": "Clinical knowledge of the disease in animals (1-10)",
+    "humanClinicalKnowledge": "Clinical knowledge of the disease in humans (1-10)",
+    "professionallyExposed": "Have you ever been professionally exposed to a suspected or confirmed infected animal or human case? ",
     "yes": "Yes",
     "no": "No",
-    "exposureFrequencyLabel": "Exposure frequency",
+    "exposureFrequencyLabel": "How often are you exposed to information, activities, or professional tasks related to this disease? ",
     "exposureFrequency": {
       "veryFrequently": "Very frequently (almost every month)",
       "frequently": "Frequently (at least twice a year)",
@@ -329,7 +329,7 @@
       "veryRare": "Very rare (at least once during working career)",
       "never": "Never"
     },
-    "yearsInvolvedLabel": "Years involved",
+    "yearsInvolvedLabel": "How long have you been involved in activities related to this disease? ",
     "yearsInvolved": {
       "lessThan5": "< 5 years",
       "from5to10": "5-10 years",

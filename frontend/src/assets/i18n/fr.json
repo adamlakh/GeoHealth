@@ -131,7 +131,7 @@
     "comment": "Commentaire",
     "savechangesbutton": "Sauvegarder les modifications",
     "savebutton": "Sauvegarder",
-    "commentdescription" : "Vous pouvez ajouter un commentaire libre afin de justifier votre évaluation ou d’apporter des précisions contextuelles. Par exemple : données manquantes, événements récents, connaissance locale, biais perçus, évolution inhabituelle de la situation, etc.",
+    "commentdescription" : "Vous pouvez ajouter un commentaire libre afin de justifier votre évaluation ou d’apporter des précisions contextuelles. Par exemple: un facteur de risque non pris en compte, données manquantes, événements récents, connaissance locale, biais perçus, évolution inhabituelle de la situation, etc.",
     "placeholder" : "Saisissez votre commentaire...",
     "firstoption": "élevé",
     "secondoption": "moyen",
@@ -264,7 +264,7 @@
   "evaluatorProfile": {
     "title": "Profil de l'évaluateur",
     "generalProfileTitle": "Profil général",
-    "professionsLabel": "Profession(s) :",
+    "professionsLabel": "Quelle est votre profession (Plusieurs réponses possibles): ",
     "professions": {
       "medicalDoctor": "Médecin",
       "medicalNurse": "Infirmier(ère)",
@@ -281,14 +281,14 @@
       "lecturer": "Enseignant(e) / Professeur(e)",
       "other": "Autre"
     },
-    "sectorsLabel": "Secteur(s) d'emploi :",
+    "sectorsLabel": "Quel est votre secteur d'emploi ? (Plusieurs réponses possibles): ",
     "sectors": {
       "public": "Public",
       "private": "Privé",
       "both": "Les deux",
       "other": "Autre"
     },
-    "interventionLevelsLabel": "Niveau d'intervention :",
+    "interventionLevelsLabel": "Quel est votre niveau d'intervention dans la pyramide sanitaire (Plusieurs réponses possibles): ",
     "interventionLevels": {
       "national": "National",
       "regional": "Régional",
@@ -296,7 +296,7 @@
       "healthDistrict": "District sanitaire",
       "other": "Autre"
     },
-    "sectorsWorkedInLabel": "Secteur(s) dans lesquels vous travaillez :",
+    "sectorsWorkedInLabel": "Dans quels secteurs travaillez-vous ? (Plusieurs réponses possibles): ",
     "sectorsWorkedIn": {
       "livestock": "Élevage",
       "agriculture": "Agriculture",
@@ -307,20 +307,20 @@
       "publicAdministration": "Administration publique - Décideur politique",
       "other": "Autre"
     },
-    "locationLabel": "Zones de pratique professionnelle",
+    "locationLabel": "Veuillez indiquer vos domaines d'exercice professionnel: ",
     "country": "Pays",
     "region": "Région",
     "division": "Division",
-    "rvfTitle": "Expérience - Fièvre de la vallée du Rift",
-    "evdTitle": "Expérience - Maladie à virus Ebola",
-    "pathogenKnowledge": "Connaissance du pathogène (1-10)",
-    "transmissionKnowledge": "Connaissance de la transmission (1-10)",
-    "animalClinicalKnowledge": "Connaissance clinique chez l'animal (1-10)",
-    "humanClinicalKnowledge": "Connaissance clinique chez l'humain (1-10)",
-    "professionallyExposed": "Exposition professionnelle",
+    "rvfTitle": "Pour la Fièvre de la Vallée du Rift, sur une échelle de 1 à 10, comment évalueriez-vous vos connaissances dans les domaines suivants? ",
+    "evdTitle": "Pour la Maladie à virus Ebola, sur une échelle de 1 à 10, comment évalueriez-vous vos connaissances dans les domaines suivants? ",
+    "pathogenKnowledge": "Connaissance de la biologie (pathogénie/infectivité) de l'agent pathogène (1-10)",
+    "transmissionKnowledge": "Connaissance des mécanismes de transmission des agents pathogènes aux hôtes (1-10)",
+    "animalClinicalKnowledge": "Connaissance clinique de la maladie chez l'animal (1-10)",
+    "humanClinicalKnowledge": "Connaissance clinique de la maladie chez l'humain (1-10)",
+    "professionallyExposed": "Avez-vous déjà été professionnellement exposé(e) à un cas animal ou humain suspecté ou confirmé infecté? ",
     "yes": "Oui",
     "no": "Non",
-    "exposureFrequencyLabel": "Fréquence d'exposition",
+    "exposureFrequencyLabel": "À quelle fréquence êtes-vous exposé(e) à des informations, des activités ou des tâches professionnelles liées à cette maladie? ",
     "exposureFrequency": {
       "veryFrequently": "Très fréquemment (presque tous les mois)",
       "frequently": "Fréquemment (au moins deux fois par an)",
@@ -328,7 +328,7 @@
       "veryRare": "Très rarement (au moins une fois dans la carrière)",
       "never": "Jamais"
     },
-    "yearsInvolvedLabel": "Années d'implication",
+    "yearsInvolvedLabel": "Depuis combien de temps êtes-vous impliqué(e) dans des activités liées à cette maladie? ",
     "yearsInvolved": {
       "lessThan5": "< 5 ans",
       "from5to10": "5-10 ans",
