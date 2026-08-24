@@ -2,13 +2,14 @@
   display: block;
 }
 .container {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   pointer-events: none;
   top:10px;
-  right: 0;
+  right: 20px;
+  z-index: 10100;
 }
 
 .select {
