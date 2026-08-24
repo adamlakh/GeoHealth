@@ -140,7 +140,7 @@
     "private": "Privé"
   },
   "map": {
-    "placeholder": "Rechercher un facteur de risque…",
+    "placeholder": "Chercher un facteur de risque",
     "dropdown": "Département uniquement",
     "dropdown2" : "Couche raster",
     "info2": "Région :",

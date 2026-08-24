@@ -140,7 +140,7 @@
     "private": "Private"
   },
   "map":{
-    "placeholder": "Look for a risk factor…",
+    "placeholder": "Search a risk factor",
     "dropdown" : "Division only",
     "dropdown2" : "Raster layer",
     "info2": "Region:",
