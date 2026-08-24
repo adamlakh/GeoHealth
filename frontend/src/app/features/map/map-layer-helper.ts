@@ -80,16 +80,13 @@ export class MapLayerHelper {
 
 
   /**
-   * Make transparent annotations on the layer on OSM
-   *    if active is True,
-   *    else make usable annotations otherwise
+   * Toggle the visibility of annotations on the map
    *
-   * @param active : boolean variable that influence annotations display
-   *    True : transparent annotations (of Geoman library, not geojson from shapefile)
-   *    False : usable annotations
-   * */
-  toggleInspectMode(active: boolean): void {
-    this.inspectModeActive = active;
+   * @param visible : boolean variable that controls annotation visibility
+   *    True : show annotations
+   *    False : hide annotations
+   */
+  toggleAnnotationsVisibility(visible: boolean): void {
     if (!this.geoManLayer) {
       return;
     }
@@ -113,11 +110,7 @@ export class MapLayerHelper {
       }
 
       if (element){
-        if (active){
-          element.style.pointerEvents = 'none';
-        } else {
-          element.style.pointerEvents = 'auto';
-        }
+        element.style.display = visible ? 'block' : 'none';
       }
     });
   }

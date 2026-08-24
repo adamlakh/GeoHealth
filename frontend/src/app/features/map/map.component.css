@@ -411,3 +411,14 @@
       display: none;
     }
 }
+
+.material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

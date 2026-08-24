@@ -20,6 +20,10 @@ public class AnnotationService {
         return annotationRepository.findByAnnotationId(annotationId);
     }
 
+    public Optional<Annotation> findByMapIdAndUserId(Long mapId, Long userId) {
+        return annotationRepository.findByMapIdAndUserId(mapId, userId);
+    }
+
     /**
      * Save the annotation (geojson + AnnotationId) in the db
      *

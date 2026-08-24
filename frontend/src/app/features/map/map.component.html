@@ -8,21 +8,21 @@
       <button
         (click)="saveAnnotation()"
         [disabled]="isSaving"
-        class="save-btn">
-        {{ isSaving ? ('map.saving' | transloco) : ('map.save' | transloco) }}
+        class="save-btn"
+        title="Save annotations">
+        <span class="material-icons">{{ isSaving ? 'hourglass_empty' : 'save' }}</span>
         @if (saveMessage) {
-          <span class="save-message">{{ saveMessage }}</span>
+        <span class="save-message">{{ saveMessage }}</span>
         }
       </button>
 
-      <!-- Button inspect/draw -->
+      <!-- Button show/hide annotations -->
       <button
-        (click)="toggleInspectMode()"
-        [class.active]="inspectModeActive"
-        class="inspect-mode-btn"
-        title="Click on division">
-        <span *ngIf="inspectModeActive">{{ 'map.viewDivision' | transloco }}</span>
-        <span *ngIf="!inspectModeActive">{{ 'map.drawingMode' | transloco }}</span>
+        (click)="toggleAnnotationsVisibility()"
+        [class.active]="showAnnotations()"
+        class="annotations-toggle-btn"
+        title="Toggle annotations visibility">
+        <span class="material-icons">{{ showAnnotations() ? 'visibility' : 'visibility_off' }}</span>
       </button>
 
       <!-- Dropdown only to be shown on mobile -->
@@ -181,7 +181,7 @@
 
     <!-- Buttons evaluation from -->
     <div class="side-footer">
-      @if(selectedDivision() && !showEvaluationModal()){
+      @if(!showEvaluationModal()){
         <app-button
           [text]="existingForm() ? ('map.editbutton' | transloco) : ('map.addbutton' | transloco)"
           [variant]="'success'"

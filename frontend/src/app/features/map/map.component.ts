@@ -74,7 +74,7 @@ export class MapComponent implements AfterViewInit {
 
   showEvaluatorsModal = signal<boolean>(false);
 
-  inspectModeActive : boolean = false;
+  showAnnotations = signal<boolean>(true);
 
   // about annotations
   currentUserId = -1;
@@ -151,8 +151,28 @@ export class MapComponent implements AfterViewInit {
               this.onDivisionClicked(event);
               },
           this.mapTag().at(0));
+          this.loadAnnotations();
       },
       error: (err) => console.error('Failed to load map data', err)
+    });
+  }
+
+  private loadAnnotations(): void {
+    this.usersServices.getUserForAnnotation().subscribe({
+      next: userInfo => {
+        this.currentUserId = userInfo.id;
+        this.annotationService.getAnnotations(this.mapId, this.currentUserId).subscribe({
+          next: (data) => {
+            if (data?.geoJson) {
+              this.mapHelper.loadAnnotationsFromGeoJson(data.geoJson.toString());
+              this.cdr.detectChanges();
+            }
+          },
+          error: (err) => {
+            console.error('Failed to load annotations:', err);
+          }
+        });
+      }
     });
   }
 
@@ -259,7 +279,7 @@ export class MapComponent implements AfterViewInit {
       next: userInfo => {
         this.currentUserId = userInfo.id
 
-        this.annotationService.getAnnotations(this.mapId,this.currentUserId, event.properties.dvsn_nm ?? event.properties.NAME_2).subscribe({
+        this.annotationService.getAnnotations(this.mapId,this.currentUserId).subscribe({
           next: (data) => {
 
             if (data?.geoJson) {
@@ -416,9 +436,9 @@ export class MapComponent implements AfterViewInit {
     return getRiskColor(riskClass);
   }
 
-  toggleInspectMode(): void {
-    this.inspectModeActive = !this.inspectModeActive;
-    this.mapHelper.toggleInspectMode(this.inspectModeActive);
+  toggleAnnotationsVisibility(): void {
+    this.showAnnotations.set(!this.showAnnotations());
+    this.mapHelper.toggleAnnotationsVisibility(this.showAnnotations());
   }
 
 
@@ -426,14 +446,6 @@ export class MapComponent implements AfterViewInit {
   public saveAnnotation() {
     const geojsonData = this.mapHelper.getGeomanGeojson();
 
-    if (geojsonData == null) {
-      this.saveMessage = 'No annotations here';
-      return;
-    }
-    if (this.selectedDivision() == null) {
-      this.saveMessage = 'No divisions selected';
-      return;
-    }
 
     this.isSaving = true;
 
@@ -442,8 +454,7 @@ export class MapComponent implements AfterViewInit {
         const dto: AnnotationDTO = {
           mapId: this.mapId,
           userId: userInfo.id,
-          division: this.selectedDivision().dvsn_nm ?? this.selectedDivision().NAME_2,
-          geoJson: geojsonData
+          geoJson: geojsonData || ''
         };
 
         this.annotationService.postAnnotations(dto).subscribe({
