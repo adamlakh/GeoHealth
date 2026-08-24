@@ -19,14 +19,13 @@ public class AnnotationController {
 
     public AnnotationController(AnnotationService annotationService){this.annotationService  = annotationService;}
 
-    @GetMapping("/{mapId}/{userId}/{division}")
+    @GetMapping("/{mapId}/{userId}")
     public ResponseEntity<Object> getAnnotation(@PathVariable Long mapId,
-                                                @PathVariable Long userId,
-                                                @PathVariable String division){
+                                                @PathVariable Long userId
+                                                ){
 
-        final Optional<Annotation> annotation = annotationService.findByAnnotationId(new AnnotationId(userId, mapId, division));
+        final Optional<Annotation> annotation = annotationService.findByMapIdAndUserId(mapId, userId);
         if (annotation.isPresent()){
-
             return ResponseEntity.status(200).body(new AnnotationDTO( annotation.get().getGeoJson()));
         }else {
             return ResponseEntity.status(400).body("Geojson for annotations not found");
@@ -38,10 +37,9 @@ public class AnnotationController {
         try {
             final Long mapId = dto.mapId();
             final Long userId = dto.userId();
-            final String division = dto.division();
             final String geoJson = dto.geoJson();
 
-            final AnnotationId id = new AnnotationId(userId, mapId, division);
+            final AnnotationId id = new AnnotationId(userId, mapId);
 
             final Annotation annotation = new Annotation(id, geoJson);
 

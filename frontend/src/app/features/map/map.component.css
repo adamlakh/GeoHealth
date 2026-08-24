@@ -291,38 +291,7 @@
 
 }
 
-
-.clear-btn {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  color: #999;
-  font-size: 14px;
-  line-height: 1;
-}
-
-.clear-btn:hover {
-  color: #333;
-}
-
-
-.input-icon {
-  position: absolute;
-  right: 10px;
-  color: #999;
-  font-size: 14px;
-  user-select: none;
-}
-
-.input-icon.clickable {
-  cursor: pointer;
-}
-
-.input-icon.clickable:hover {
-  color: #333;
-}
-
-.inspect-mode-btn {
+.annotations-toggle-btn {
   z-index: 999;
   padding: 6px 10px;
   background: white;
@@ -367,8 +336,18 @@
 }
 
 .save-message {
-  display: block;
-  color: #b80b0b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  font-size: 14px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  color: #2d5016;
+  border: 1px solid #7ee87e;
 }
 
 .mobile-dropdown {
@@ -393,12 +372,6 @@
   .map-container {
     height: 500px;
   }
-  .save-btn {
-    width : 50%
-  }
-  .inspect-mode-btn {
-    width: 50%;
-  }
   .info-card p {
     font-size: 13px;
   }
@@ -411,3 +384,16 @@
       display: none;
     }
 }
+
+.material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
