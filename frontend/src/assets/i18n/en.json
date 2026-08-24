@@ -343,6 +343,6 @@
     "edit": "Edit",
     "save": "Save",
     "saveSuccess": "Profile saved successfully.",
-    "completeProfilePrompt": "Please complete your evaluator profile to access the maps."
+    "completeProfilePrompt": "Please complete your evaluator profile before evaluating maps."
   }
 }
