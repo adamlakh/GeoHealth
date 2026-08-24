@@ -11,7 +11,6 @@ import {ChangePasswordPageComponent} from './features/auth/pages/change-password
 import {adminGuard} from './features/admin/guard/admin-guard';
 import {AboutComponent} from './features/about/pages/about/about/about.component';
 import {EvaluatorProfile} from './features/evaluator-profile/evaluator-profile';
-import {evaluatorProfileGuard} from './features/evaluator-profile/guard/evaluator-profile-guard';
 
 export const routes: Routes = [
   {
@@ -27,7 +26,7 @@ export const routes: Routes = [
   },{
     path: 'maps/:id',
     component: MapComponent,
-    canActivate: [authGuard, evaluatorProfileGuard],
+    canActivate: [authGuard],
   },{
     path:'navigation',
     component: NavigationPageComponent,

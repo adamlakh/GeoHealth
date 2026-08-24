@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRef, computed} from '@angular/core';
+import {Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRef, computed, inject} from '@angular/core';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {RouterModule, ActivatedRoute} from '@angular/router';
 import { FinalMapService } from '../../core/service/MapService/FinalMapService/finalMapService';
@@ -33,6 +33,9 @@ import {FormsModule} from '@angular/forms';
 import {ReportService} from '../../core/service/ReportService/reportService';
 import {EvaluatorsModalComponent} from './evaluators-modal/evaluators-modal';
 import {UserSummaryDto} from '../../shared/models/AdminModel/UserModel/UserSummaryDto';
+
+import { Router } from '@angular/router';
+import { EvaluatorProfileService } from '../../core/service/EvaluatorProfileService/EvaluatorProfileService';
 
 @Component({
   selector: 'app-map',
@@ -78,6 +81,10 @@ export class MapComponent implements AfterViewInit {
   saveMessage = '';
   isSaving = false;
   private lastDivisionName: string | null = null;
+
+  //redirecting purpose
+  private evaluatorProfileService = inject(EvaluatorProfileService);
+  private router = inject(Router);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -322,7 +329,20 @@ export class MapComponent implements AfterViewInit {
    * Opens the evaluation modal for the selected division
    */
   onOpenEvaluation(): void {
-    this.showEvaluationModal.set(true);
+    this.evaluatorProfileService.hasProfile().subscribe({
+      next: (hasProfile: boolean) => {
+        if (!hasProfile) {
+          this.router.navigate(['evaluator-profile']);
+          window.scrollTo(0, 0);
+          return;
+        }
+        this.showEvaluationModal.set(true);
+      },
+      error: (err: any) => {
+        console.error('Error checking profile:', err);
+        alert('Error verifying your profile');
+      }
+    });
   }
 
   /**

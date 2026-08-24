@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -14,6 +14,7 @@ import { ResponseEvaluatorProfileDto } from '../../shared/models/EvaluatorProfil
   imports: [CommonModule, FormsModule, TranslocoPipe],
   templateUrl: './evaluator-profile.html',
   styleUrl: './evaluator-profile.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvaluatorProfile implements OnInit {
   selectedProfessions: string[] = [];
@@ -34,6 +35,7 @@ export class EvaluatorProfile implements OnInit {
   hasExistingProfile = false;
   showProfileRequiredPopup = false;
   isEditing = true;
+  isLoading = true;
 
   rvfExperience = {
     pathogenKnowledgeScore: null as number | null,
@@ -67,16 +69,25 @@ export class EvaluatorProfile implements OnInit {
         this.hasExistingProfile = hasProfile;
         this.isEditing = !hasProfile;
         this.showProfileRequiredPopup = !hasProfile;
+
         if (hasProfile) {
           this.loadExistingProfile();
+        } else {
+          this.isLoading = false;
+          this.cdr.markForCheck();
         }
       },
-      error: (err) => console.error('Error while checking evaluator profile', err),
+      error: (err) => {
+        console.error('Error while checking evaluator profile', err);
+        this.isLoading = false;
+        this.cdr.markForCheck();
+      },
     });
   }
 
   enableEdit(): void {
     this.isEditing = true;
+    this.cdr.markForCheck();
   }
 
   toggle(selected: string[], value: string, checked: boolean): void {
@@ -86,6 +97,7 @@ export class EvaluatorProfile implements OnInit {
     } else if (!checked && index !== -1) {
       selected.splice(index, 1);
     }
+    this.cdr.markForCheck();
   }
 
   private isDiseaseExperienceValid(experience: {
@@ -165,6 +177,7 @@ export class EvaluatorProfile implements OnInit {
   submit(): void {
     if (!this.isFormValid()) {
       this.showValidationError = true;
+      this.cdr.markForCheck();
       return;
     }
 
@@ -187,10 +200,13 @@ export class EvaluatorProfile implements OnInit {
         next: () => {
           this.isEditing = false;
           this.showSuccessMessage = true;
-          this.cdr.detectChanges();
+          this.cdr.markForCheck();
           console.log('Evaluator profile updated successfully');
         },
-        error: (err) => console.error('Error while updating evaluator profile', err),
+        error: (err) => {
+          console.error('Error while updating evaluator profile', err);
+          this.cdr.markForCheck();
+        },
       });
     } else {
       this.evaluatorProfileService.saveProfile(dto).subscribe({
@@ -198,10 +214,13 @@ export class EvaluatorProfile implements OnInit {
           this.hasExistingProfile = true;
           this.isEditing = false;
           this.showSuccessMessage = true;
-          this.cdr.detectChanges();
+          this.cdr.markForCheck();
           console.log('Evaluator profile saved successfully');
         },
-        error: (err) => console.error('Error while saving evaluator profile', err),
+        error: (err) => {
+          console.error('Error while saving evaluator profile', err);
+          this.cdr.markForCheck();
+        },
       });
     }
   }
@@ -221,12 +240,16 @@ export class EvaluatorProfile implements OnInit {
         this.rvfExperience = this.fromDiseaseExperienceDto(profile.rvfExperience);
         this.evdExperience = this.fromDiseaseExperienceDto(profile.evdExperience);
 
-        this.cdr.detectChanges();
+        this.isLoading = false;
+        this.cdr.markForCheck();
       },
-      error: (err) => console.error('Error while loading evaluator profile', err),
+      error: (err) => {
+        console.error('Error while loading evaluator profile', err);
+        this.isLoading = false;
+        this.cdr.markForCheck();
+      },
     });
   }
-
 
   private isValidScore(score: number | null): boolean {
     return score !== null && score > 0 && score <= 10;
@@ -234,5 +257,6 @@ export class EvaluatorProfile implements OnInit {
 
   closeProfileRequiredPopup(): void {
     this.showProfileRequiredPopup = false;
+    this.cdr.markForCheck();
   }
 }
