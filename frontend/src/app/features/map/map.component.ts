@@ -80,7 +80,6 @@ export class MapComponent implements AfterViewInit {
   currentUserId = -1;
   saveMessage = '';
   isSaving = false;
-  private lastDivisionName: string | null = null;
 
   //redirecting purpose
   private evaluatorProfileService = inject(EvaluatorProfileService);
@@ -259,12 +258,6 @@ export class MapComponent implements AfterViewInit {
     }
     this.saveMessage= '';
 
-    // delete annotation if the division selected is not the same that the previous
-    if (this.lastDivisionName !== event.properties.NAME_2) {
-      this.mapHelper.clearGeomanLayers();
-      this.lastDivisionName = event.properties.NAME_2;
-    }
-
     this.selectedDivision.set(event.properties);
     if (!this.mapHelper.isRasterActive()) {
         this.mapHelper.placeMarker(event.latlng);
@@ -275,24 +268,6 @@ export class MapComponent implements AfterViewInit {
       error: () => this.existingForm.set(null)
     });
 
-    this.usersServices.getUserForAnnotation().subscribe({
-      next: userInfo => {
-        this.currentUserId = userInfo.id
-
-        this.annotationService.getAnnotations(this.mapId,this.currentUserId).subscribe({
-          next: (data) => {
-
-            if (data?.geoJson) {
-              this.mapHelper.loadAnnotationsFromGeoJson(data.geoJson.toString());
-              this.cdr.detectChanges();
-            }
-          },
-          error: (err) => {
-              console.error('Unexpected annotation error:', err);
-          }
-        });
-      }
-    });
     this.loadMeasurements(event.properties.NAME_2, event.properties.rsk_cls);
   }
 
@@ -446,9 +421,7 @@ export class MapComponent implements AfterViewInit {
   public saveAnnotation() {
     const geojsonData = this.mapHelper.getGeomanGeojson();
 
-
     this.isSaving = true;
-
     this.usersServices.getUserForAnnotation().subscribe({
       next: userInfo => {
         const dto: AnnotationDTO = {
@@ -459,13 +432,12 @@ export class MapComponent implements AfterViewInit {
 
         this.annotationService.postAnnotations(dto).subscribe({
           next: () => {
-            this.saveMessage = 'Annotations saved';
+            this.showSaveMessage('Annotations saved');
             this.isSaving = false;
-            // Allow angular to update the state displayed of teh saveMessage
             this.cdr.detectChanges();
           },
           error: (err) => {
-            this.saveMessage = 'Annotations cant be saved';
+            this.showSaveMessage('Annotations cant be saved');
             this.isSaving = false;
             console.error(err);
             this.cdr.detectChanges();
@@ -474,7 +446,7 @@ export class MapComponent implements AfterViewInit {
 
       },
       error: (err) => {
-        this.saveMessage = 'User not detected';
+        this.showSaveMessage('User not detected');
         this.isSaving = false;
         console.error(err);
       }
@@ -523,4 +495,12 @@ export class MapComponent implements AfterViewInit {
     this.showEvaluatorsModal.set(false);
   }
 
+  private showSaveMessage(message: string) {
+    this.saveMessage = message;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.saveMessage = '';
+      this.cdr.detectChanges();
+    }, 3000);
+  }
 }

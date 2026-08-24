@@ -11,9 +11,6 @@
         class="save-btn"
         title="Save annotations">
         <span class="material-icons">{{ isSaving ? 'hourglass_empty' : 'save' }}</span>
-        @if (saveMessage) {
-        <span class="save-message">{{ saveMessage }}</span>
-        }
       </button>
 
       <!-- Button show/hide annotations -->
@@ -56,6 +53,10 @@
       </datalist>
 
     </div> <!-- end map-selector -->
+
+    @if (saveMessage) {
+    <p class="save-message">{{ saveMessage }}</p>
+    }
 
     <!-- Leaflet map-->
     <div id="map"></div>
