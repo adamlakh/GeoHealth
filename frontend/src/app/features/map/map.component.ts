@@ -132,6 +132,7 @@ export class MapComponent implements AfterViewInit {
         this.mapTag.set(mapData.tags);
 
         const geoJson = JSON.parse(mapData.fileGeoJson);
+        console.log(geoJson);
         const divisions: { name: string, risk: string }[] = [];
 
         for (const feature of geoJson.features) {
@@ -470,6 +471,12 @@ export class MapComponent implements AfterViewInit {
       error: (err) => {
         console.error('Failed to generate user profile', err);
       }
+    });
+    this.mapHelper.createAnnotationPng().then((pngBlob: Blob) => {
+      downloadBlob(pngBlob, `map-annotations-${this.mapId}.png`);
+      console.log('Map annotations screenshot successfully downloaded');
+    }).catch((err: any) => {
+      console.error('Failed to capture map annotations screenshot', err);
     });
   }
 

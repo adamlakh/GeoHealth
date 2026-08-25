@@ -21,7 +21,7 @@ export class MapLayerHelper {
   // all annotation on the map
   private geoManLayer: any;
   // the value of the pixel (pixel group) in the raster layer
-  lastBlockMean = signal<number | null>(null);
+  public lastBlockMean = signal<number | null>(null);
 
   private inspectModeActive: boolean = false;
 
@@ -360,4 +360,70 @@ export class MapLayerHelper {
   isRasterActive(): boolean {
       return this.tileLayer !== null;
   }
+
+  /**
+   * Captures the current vector layers (division polygons + geoman annotations)
+   * as a PNG blob, on a transparent background.
+   */
+createAnnotationPng(): Promise<Blob> {
+  const svg: SVGSVGElement | null = this.map.getPane('overlayPane')?.querySelector('svg');
+  if (!svg) {
+    return Promise.reject(new Error('No SVG found'));
+  }
+
+  const svgClone = svg.cloneNode(true) as SVGSVGElement;
+  const size = this.map.getSize();
+  svgClone.setAttribute('width', size.x.toString());
+  svgClone.setAttribute('height', size.y.toString());
+
+  const targetGroup = svgClone.querySelector('g') ?? svgClone;
+  if (this.geoManLayer) {
+    this.geoManLayer.eachLayer((layer: any) => {
+      const shape = layer.pm?.getShape?.() ?? layer.feature?.properties?.shape;
+      if (shape !== 'Text' || !layer.getLatLng) return;
+
+      const text: string =
+        layer.pm?.getText?.() ??
+        layer.feature?.properties?.text ??
+        layer.options?.text ??
+        '';
+      if (!text) return;
+
+      const point = this.map.latLngToLayerPoint(layer.getLatLng());
+
+      const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      textEl.setAttribute('x', point.x.toString());
+      textEl.setAttribute('y', point.y.toString());
+      textEl.setAttribute('font-size', '14');
+      textEl.setAttribute('fill', '#222222');
+      textEl.setAttribute('stroke', 'white');
+      textEl.setAttribute('stroke-width', '4');
+      textEl.setAttribute('paint-order', 'stroke');
+      textEl.textContent = text;
+      targetGroup.appendChild(textEl);
+    });
+  }
+
+  const svgString = new XMLSerializer().serializeToString(svgClone);
+  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = size.x;
+      canvas.height = size.y;
+      const ctx = canvas.getContext('2d')!;
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+      canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error('toBlob failed')));
+    };
+    img.onerror = (err) => {
+      URL.revokeObjectURL(url);
+      reject(err);
+    };
+    img.src = url;
+  });
+}
 }
