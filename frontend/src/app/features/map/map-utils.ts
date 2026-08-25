@@ -59,3 +59,12 @@ export function normalizeRasterTitle(title: string): string {
     .replace(/\s+/g, ' ')
     .trim();
 }
+
+export function downloadBlob(blob: Blob, filename: string): void {
+  const url = window.URL.createObjectURL(blob);
+  const urlProxy = document.createElement('a');
+  urlProxy.href = url;
+  urlProxy.download = filename;
+  urlProxy.click();
+  window.URL.revokeObjectURL(url);
+  }

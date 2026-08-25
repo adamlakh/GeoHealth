@@ -2,7 +2,6 @@ import {Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRef
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {RouterModule, ActivatedRoute} from '@angular/router';
 import { FinalMapService } from '../../core/service/MapService/FinalMapService/finalMapService';
-import { RasterMapService } from '../../core/service/MapService/RasterService/RasterMapService';
 import { RasterMapListDto } from '../../shared/models/MapModel/RasterMapModel/RasterMapListDto';
 import {ResponseEvaluationFormDto} from '../../shared/models/EvaluationFormModel/ResponseEvaluationFormDto';
 import {EvaluationFormService} from '../../core/service/EvaluationFormService/EvaluationFormService';
@@ -11,7 +10,7 @@ import {AdminEvaluationFormService} from '../../core/service/AdminService/AdminE
 import {AdminResponseEvaluationFormDto} from '../../shared/models/AdminModel/EvaluationFormModel/AdminResponseEvaluationFormDto';
 import { MapLayerHelper } from './map-layer-helper';
 import { TranslocoService } from '@jsverse/transloco';
-import { RISK_LEVELS, getRiskColor, normalizeRasterTitle } from './map-utils';
+import { RISK_LEVELS, getRiskColor, normalizeRasterTitle, downloadBlob } from './map-utils';
 import {CAMEROON_COORDINATES} from './map.constants';
 import {CAMEROON_ZOOM} from './map.constants';
 import {AnnotationService} from '../../core/service/MapService/AnnotationService/AnnotationService';
@@ -67,10 +66,10 @@ export class MapComponent implements AfterViewInit {
   searchValue: string = '';
 
   // Help computing the metrics for the map
-  public mapMetrics!: MapMetrics;
+  mapMetrics!: MapMetrics;
 
   // helper class managing the Leaflet map layers and interactions
-  public mapHelper = new MapLayerHelper();
+  mapHelper = new MapLayerHelper();
 
   showEvaluatorsModal = signal<boolean>(false);
 
@@ -89,7 +88,6 @@ export class MapComponent implements AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private mapService: FinalMapService,
     private usersServices: UsersServices,
-    private rasterMapService: RasterMapService,
     private evaluationFormService: EvaluationFormService,
     private adminEvaluationFormService:AdminEvaluationFormService,
     private cdr: ChangeDetectorRef,
@@ -134,6 +132,7 @@ export class MapComponent implements AfterViewInit {
         this.mapTag.set(mapData.tags);
 
         const geoJson = JSON.parse(mapData.fileGeoJson);
+        console.log(geoJson);
         const divisions: { name: string, risk: string }[] = [];
 
         for (const feature of geoJson.features) {
@@ -333,9 +332,8 @@ export class MapComponent implements AfterViewInit {
         }
         this.showEvaluationModal.set(true);
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Error checking profile:', err);
-        alert('Error verifying your profile');
       }
     });
   }
@@ -384,12 +382,7 @@ export class MapComponent implements AfterViewInit {
     // Get the report and download it
     this.reportService.getReport(this.mapId,divisionRiskDto).subscribe({
       next: (blob: Blob) => {
-          const url = window.URL.createObjectURL(blob);
-          const urlProxy = document.createElement('a');
-          urlProxy.href = url;
-          urlProxy.download = 'report.xlsx';
-          urlProxy.click();
-          window.URL.revokeObjectURL(url);
+          downloadBlob(blob, 'metric-report.xlsx');
           console.log('Report successfully downloaded');
       },
       error: (err) => {
@@ -418,7 +411,7 @@ export class MapComponent implements AfterViewInit {
 
 
   // ------- about annotations -------
-  public saveAnnotation() {
+  saveAnnotation() {
     const geojsonData = this.mapHelper.getGeomanGeojson();
 
     this.isSaving = true;
@@ -462,12 +455,7 @@ export class MapComponent implements AfterViewInit {
 
     this.reportService.getUserReport(this.mapId, user.id).subscribe({
       next: (blob: Blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const urlProxy = document.createElement('a');
-        urlProxy.href = url;
-        urlProxy.download = `report-${user.username}-${this.mapTitle()}.xlsx`;
-        urlProxy.click();
-        window.URL.revokeObjectURL(url);
+        downloadBlob(blob, `report-${user.username}-${this.mapTitle()}.xlsx`);
         console.log('User report successfully downloaded');
       },
       error: (err) => {
@@ -477,16 +465,33 @@ export class MapComponent implements AfterViewInit {
 
     this.reportService.getUserProfile(user.id).subscribe({
       next: (blob: Blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const urlProxy = document.createElement('a');
-        urlProxy.href = url;
-        urlProxy.download = `profile-${user.username}.xlsx`;
-        urlProxy.click();
-        window.URL.revokeObjectURL(url);
+        downloadBlob(blob, `profile-${user.username}.xlsx`);
         console.log('User profile successfully downloaded');
       },
       error: (err) => {
         console.error('Failed to generate user profile', err);
+      }
+    });
+
+    this.annotationService.getAnnotations(this.mapId, user.id).subscribe({
+      next: (data) => {
+        if (data?.geoJson) {
+          this.mapHelper.loadAnnotationsFromGeoJson(data.geoJson.toString());
+        }
+
+        this.mapHelper.createAnnotationPng().then((pngBlob: Blob) => {
+          downloadBlob(pngBlob, `map-annotations-${this.mapId}.png`);
+          console.log('Map annotations screenshot successfully downloaded');
+        })
+      .catch((err: any) => {
+          console.error('Failed to capture map annotations screenshot', err);
+        })
+      .finally(() => {
+          this.loadAnnotations();
+        });
+      },
+      error: (err) => {
+        console.error(`Failed to load annotations for user ${user.id}`, err);
       }
     });
   }

@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnInit {
   loginError = signal(false);
   errorMessage = signal('');
 
-
+  private transloco = inject(TranslocoService);
   constructor(
     private loginService: LoginService,
     private router: Router
@@ -46,7 +46,6 @@ export class LoginPageComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     });
   }
-  private transloco = inject(TranslocoService);
 
   /**
    * Request login to the backend with formGroup information
