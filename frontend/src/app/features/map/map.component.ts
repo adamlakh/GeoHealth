@@ -472,11 +472,27 @@ export class MapComponent implements AfterViewInit {
         console.error('Failed to generate user profile', err);
       }
     });
-    this.mapHelper.createAnnotationPng().then((pngBlob: Blob) => {
-      downloadBlob(pngBlob, `map-annotations-${this.mapId}.png`);
-      console.log('Map annotations screenshot successfully downloaded');
-    }).catch((err: any) => {
-      console.error('Failed to capture map annotations screenshot', err);
+
+    this.annotationService.getAnnotations(this.mapId, user.id).subscribe({
+      next: (data) => {
+        if (data?.geoJson) {
+          this.mapHelper.loadAnnotationsFromGeoJson(data.geoJson.toString());
+        }
+
+        this.mapHelper.createAnnotationPng().then((pngBlob: Blob) => {
+          downloadBlob(pngBlob, `map-annotations-${this.mapId}.png`);
+          console.log('Map annotations screenshot successfully downloaded');
+        })
+      .catch((err: any) => {
+          console.error('Failed to capture map annotations screenshot', err);
+        })
+      .finally(() => {
+          this.loadAnnotations();
+        });
+      },
+      error: (err) => {
+        console.error(`Failed to load annotations for user ${user.id}`, err);
+      }
     });
   }
 
