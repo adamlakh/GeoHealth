@@ -343,6 +343,11 @@ export class MapComponent implements AfterViewInit {
    */
   onCloseEvaluation(): void {
     this.showEvaluationModal.set(false);
+    this.evaluationFormService.getMyFormForADiv(this.mapId, this.selectedDivision().NAME_2).subscribe({
+      next: (form) => this.existingForm.set(form),
+      error: () => this.existingForm.set(null)
+    });
+
     this.getAllForm(this.isAdmin,this.mapId);
     this.loadMeasurements(this.selectedDivision().NAME_2, this.selectedDivision().rsk_cls);
     this.cdr.detectChanges();

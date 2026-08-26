@@ -19,6 +19,7 @@ export class RatingScalerComponent {
   @Input() value: string = '';
   @Input() hasTraduction: boolean= false
   @Output() valueChange = new EventEmitter<string>();
+  @Input() fillStyle: boolean = true;
 
   onSelect(option: Option): void {
     const value = this.getValue(option);
