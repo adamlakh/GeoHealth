@@ -9,7 +9,8 @@
   box-sizing: border-box;
 }
 .side-navbar {
-  height: 92%;
+  top: 60px;
+  height: calc(100% - 60px);
   width: 250px;
   position: fixed;
   left: -250px;
