@@ -176,7 +176,9 @@
     "clickZone": "Cliquez sur une zone pour inspecter sa valeur",
     "report":  "Rapport de métriques",
     "userReport": "Rapport utilisateurs",
-    "clickDivision" :  "Cliquez sur un département pour voir ses métriques"
+    "clickDivision" :  "Cliquez sur un département pour voir ses métriques",
+    "sourcesText": "Les sources de ces cartes sont disponibles sur notre",
+    "sourcesLinkLabel": "dépôt GitHub"
   },
   "navbar": {
     "navigation": "Navigation",

@@ -193,9 +193,6 @@ export class NavigationPageComponent implements OnInit{
       result=>{
         this.getAllMaps();
         this.cdr.detectChanges();
-        setTimeout(() => {
-              window.location.reload();
-            }, 5000);
         }
     );
 
