@@ -123,6 +123,28 @@
   margin: 0;
 }
 
+.map-sources {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #878787;
+  border-bottom: 2px solid #e2e6ea;
+  background: #fafbf9;
+}
+
+.map-sources p {
+  margin: 0;
+}
+
+.map-sources a {
+  color: #4a7c28;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.map-sources a:hover {
+  text-decoration: underline;
+}
+
 .risk-row {
   display: flex;
   align-items: center;

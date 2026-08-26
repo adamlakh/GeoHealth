@@ -176,7 +176,9 @@
     "clickZone": "Click a zone to inspect its value",
     "report":  "Metrics report",
     "userReport": "Users report",
-    "clickDivision" :  "Click on a division to see its metrics"
+    "clickDivision" :  "Click on a division to see its metrics",
+    "sourcesText": "Sources for these maps are available on our",
+    "sourcesLinkLabel": "GitHub repository"
   },
   "navbar": {
     "navigation": "Navigation",
