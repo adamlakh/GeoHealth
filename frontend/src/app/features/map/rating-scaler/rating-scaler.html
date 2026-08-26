@@ -1,4 +1,4 @@
-<div class="rating-system">
+<div class="rating-system" [class.fill]="fillStyle">
   @for (option of options; track getValue(option); let i = $index) {
     <input type="radio"
            [name]="name"

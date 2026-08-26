@@ -34,8 +34,12 @@
   transition: all 0.2s;
 }
 
-.rating-system input:checked ~ label,
-.rating-system label:hover ~ label,
-.rating-system label:hover {
+.rating-system.fill input:checked ~ label,
+.rating-system.fill label:hover ~ label,
+.rating-system.fill label:hover {
+  background: #5a8f32;
+}
+
+.rating-system:not(.fill) input:checked + label {
   background: #5a8f32;
 }
