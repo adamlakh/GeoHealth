@@ -2,6 +2,11 @@
   background-color: #EBEFFF;
   overflow-x : hidden;
 }
+
+.navigation-page ::ng-deep .leaflet-control-attribution {
+  display: none !important;
+}
+
 /* SIDEBAR */
 * {
   margin: 0;
@@ -539,9 +544,9 @@ span {
     width: 35vw;
     height : 15vh;
   }
-  .all-maps {
-    padding: 0 12px;
-    overflow-x: hidden;
+  .all-the-maps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
 }
