@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class MapLegendComponent {
   @Input() mapType: string | undefined = '';
   @Input() season: string | undefined = '';
+  @Input() isRaster: boolean = false;
 
   get isEbola(): boolean {
     return this.mapType === 'EBOLA';

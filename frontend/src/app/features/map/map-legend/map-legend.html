@@ -1,6 +1,15 @@
 <div class="legend-card">
-  @if(isEbola) {
-  <div class="gradient-bar" [class.ebola-dry]="isDry" [class.ebola-wet]="!isDry"></div>
+  @if(isRaster) {
+  <div class="gradient-bar grayscale"></div>
+  <div class="gradient-labels">
+    <span>1.0</span>
+    <span>0.5</span>
+    <span>0.0</span>
+  </div>
+  } @else if(isEbola) {
+  <div class="gradient-bar"
+       [class.ebola-dry]="isDry"
+       [class.ebola-wet]="!isDry"></div>
   <div class="gradient-labels">
     <span>0.80</span>
     <span>0.50</span>
