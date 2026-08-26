@@ -88,18 +88,13 @@ export class FinalMapFormComponent implements OnInit {
     formData.append('zipFile', this.selectedZipFile);
     this.selectedTifFiles.forEach(tifFile => formData.append('tifFiles', tifFile));
 
-    this.isUploading = true;
-
     this.adminFinalMapService.uploadNewMap(formData).subscribe({
-      next: () => {
-        this.isUploading = false;
-        this.dialog.close({ uploading: false, success: true });
-        },
+      next: () => {},
       error: (err) => {
-        this.isUploading = false;
         console.error(err);
       }
     });
+    this.dialog.close({ uploading: true });
   }
 
   protected readonly disabled = disabled;
