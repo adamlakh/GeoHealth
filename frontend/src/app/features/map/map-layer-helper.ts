@@ -365,6 +365,10 @@ export class MapLayerHelper {
    * Captures the current vector layers (division polygons + geoman annotations)
    * as a PNG blob, on a transparent background.
    */
+  /**
+   * Captures the current vector layers (division polygons + geoman annotations)
+   * as a PNG blob, on a transparent background.
+   */
 createAnnotationPng(): Promise<Blob> {
   const svg: SVGSVGElement | null = this.map.getPane('overlayPane')?.querySelector('svg');
   if (!svg) {
@@ -380,6 +384,21 @@ createAnnotationPng(): Promise<Blob> {
   if (this.geoManLayer) {
     this.geoManLayer.eachLayer((layer: any) => {
       const shape = layer.pm?.getShape?.() ?? layer.feature?.properties?.shape;
+
+      if (shape === 'Marker' && layer.getLatLng) {
+        const point = this.map.latLngToLayerPoint(layer.getLatLng());
+
+        const markerEl = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        markerEl.setAttribute('cx', point.x.toString());
+        markerEl.setAttribute('cy', point.y.toString());
+        markerEl.setAttribute('r', '8');
+        markerEl.setAttribute('fill', '#1959e6');
+        markerEl.setAttribute('stroke', 'white');
+        markerEl.setAttribute('stroke-width', '2');
+        targetGroup.appendChild(markerEl);
+        return;
+      }
+
       if (shape !== 'Text' || !layer.getLatLng) return;
 
       const text: string =
