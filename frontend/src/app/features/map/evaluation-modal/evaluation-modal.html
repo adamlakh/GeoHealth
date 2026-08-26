@@ -26,19 +26,6 @@
 
       <div class="item">
         <label>
-          {{ 'evalmodal.secondcriteria' | transloco }}
-          <app-tooltip-description [description]="'evalmodal.seconddescription' | transloco"/>
-        </label>
-        <app-rating-scaler
-          name="certaintyLevel"
-          [options]="['4', '3', '2', '1']"
-          [value]="certaintyLevel?.toString() || ''"
-          (valueChange)="certaintyLevel = +$event">
-        </app-rating-scaler>
-      </div>
-
-      <div class="item">
-        <label>
           {{ 'evalmodal.thirdcriteria' | transloco }}
           <app-tooltip-description [description]="'evalmodal.thirddescription' | transloco"/>
         </label>
@@ -49,6 +36,19 @@
           [fillStyle]="false"
           [value]="perceivedRisk || ''"
           (valueChange)="perceivedRisk = $event">
+        </app-rating-scaler>
+      </div>
+
+      <div class="item">
+        <label>
+          {{ 'evalmodal.secondcriteria' | transloco }}
+          <app-tooltip-description [description]="'evalmodal.seconddescription' | transloco"/>
+        </label>
+        <app-rating-scaler
+          name="certaintyLevel"
+          [options]="['4', '3', '2', '1']"
+          [value]="certaintyLevel?.toString() || ''"
+          (valueChange)="certaintyLevel = +$event">
         </app-rating-scaler>
       </div>
 
