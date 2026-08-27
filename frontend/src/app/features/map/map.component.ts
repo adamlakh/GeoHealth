@@ -202,7 +202,7 @@ export class MapComponent implements AfterViewInit {
    */
   getRasterLabel(rawTitle: string): string {
     const cleanTitle = normalizeRasterTitle(rawTitle);
-    const key = 'rasterNames.' + cleanTitle;
+    const key = 'rasterNames.' + cleanTitle.toLowerCase();
     const translated = this.translocoService.translate(key);
     return translated === key ? cleanTitle : translated;
   }
