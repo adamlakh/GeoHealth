@@ -344,6 +344,6 @@
     "edit": "Modifier",
     "save": "Enregistrer",
     "saveSuccess": "Profil enregistré avec succès.",
-    "completeProfilePrompt": "Please complete your evaluator profile before committing any evaluation."
+    "completeProfilePrompt": "Veuillez compléter votre profil d'évaluateur avant d'évaluer des cartes."
   }
 }

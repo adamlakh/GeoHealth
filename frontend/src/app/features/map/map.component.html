@@ -181,15 +181,13 @@
               </div>
             }
           }
-
         </div>
       </div>
 
 
-
     <!-- Buttons evaluation from -->
     <div class="side-footer">
-      @if(!showEvaluationModal()){
+      @if(!showEvaluationModal() && selectedDivision()){
         <app-button
           [text]="existingForm() ? ('map.editbutton' | transloco) : ('map.addbutton' | transloco)"
           [variant]="'success'"

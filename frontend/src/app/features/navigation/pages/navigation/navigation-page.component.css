@@ -550,3 +550,17 @@ span {
   }
 
 }
+
+
+.page-footer {
+  width: 100%;
+  padding: 32px 0;
+  text-align: center;
+  font-size: 1.3em;
+  color: var(--dark-grey);
+}
+
+.page-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
