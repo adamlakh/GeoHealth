@@ -1,6 +1,8 @@
 package com.webgis.map.raster;
 
 
+import com.webgis.map.finalmap.FinalMap;
+import com.webgis.map.finalmap.FinalMapService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +22,17 @@ public class RasterMapService {
     private final RasterMapRepository rasterMapRepository;
     private final TileService tileService;
     private final TransformTifFiles transformTifFiles;
-
+    private final FinalMapService finalMapService;
 
     public RasterMapService(
             RasterMapRepository rasterMapRepository,
             TileService tileService,
-            TransformTifFiles transformTifFiles){
+            TransformTifFiles transformTifFiles,
+            FinalMapService finalMapService){
         this.rasterMapRepository = rasterMapRepository;
         this.tileService = tileService;
         this.transformTifFiles = transformTifFiles;
+        this.finalMapService = finalMapService;
     }
 
 
@@ -62,37 +66,32 @@ public class RasterMapService {
     public List<RasterMap> findAll(){
         return this.rasterMapRepository.findAll();
     }
-    
+
+
     /**
-     * Updates a raster map's title/description and fully regenerates its tiles
-     * from a new tif file — all existing tiles for this raster map are deleted
-     * and replaced, as if the raster map had been re-added from scratch.
+     * Adds a new raster map to an existing final map, and generates its tiles
+     * from the given tif file.
      *
-     * @param id identifier of the raster map to update
-     * @param title new title
-     * @param description new description
-     * @param tifFile the new tif file to regenerate tiles from
-     * @return the updated RasterMap
+     * @param finalMapId id of the final map this raster map belongs to
+     * @param title title of the new raster map
+     * @param description description of the new raster map
+     * @param tifFile the tif file to generate tiles from
+     * @return the newly created RasterMap
      */
     @Transactional
-    public RasterMap update(long id, String title, String description, MultipartFile tifFile){
-        final Optional<RasterMap> rasterMapOptional = rasterMapRepository.findById(id);
-
-        if (rasterMapOptional.isEmpty()) {
-            throw new IllegalArgumentException("RasterMap does not exist: " + id);
+    public RasterMap addRasterMap(long finalMapId, String title, String description, MultipartFile tifFile){
+        final Optional<FinalMap> finalMapOptional = finalMapService.findById(finalMapId);
+        if (finalMapOptional.isEmpty()) {
+            throw new IllegalArgumentException("FinalMap does not exist: " + finalMapId);
         }
+        final FinalMap finalMap = finalMapOptional.get();
 
-        final RasterMap rasterMap = rasterMapOptional.get();
-        rasterMap.setTitle(title);
-        rasterMap.setDescription(description);
+        final RasterMap rasterMap = new RasterMap(title, description);
+        rasterMap.setFinalMap(finalMap);
 
-        final RasterMap updatedRasterMap = rasterMapRepository.save(rasterMap);
-
-        tileService.deleteAllTilesForRasterMap(updatedRasterMap);
-        transformTifFiles.transformIntoTileFile(updatedRasterMap.getId(), tifFile);
-
-        return updatedRasterMap;
-
+        final RasterMap savedRasterMap = rasterMapRepository.save(rasterMap);
+        transformTifFiles.transformIntoTileFile(savedRasterMap.getId(), tifFile);
+        return savedRasterMap;
     }
 
     /**
@@ -102,7 +101,7 @@ public class RasterMapService {
      */
     @Transactional
     public void deleteRasterMap(long id){
-        final Optional<RasterMap> rasterMapOptional = rasterMapRepository.getById(id);
+        final Optional<RasterMap> rasterMapOptional = rasterMapRepository.findById(id);
 
         if (rasterMapOptional.isEmpty()){
             throw new IllegalArgumentException("RasterMap does not exist: " + id);
