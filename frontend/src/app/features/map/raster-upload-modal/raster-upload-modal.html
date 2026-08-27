@@ -1,0 +1,41 @@
+<div cdkDrag class="raster-upload-modal">
+  <div class="modal-header" cdkDragHandle>
+    <h2>Upload risk factor</h2>
+    <button class="close-btn" (click)="onClose()">×</button>
+  </div>
+
+  <div class="modal-content">
+    <div class="item">
+      <label>Title</label>
+      <input type="text" [(ngModel)]="title" placeholder="My title" />
+    </div>
+
+    <div class="item">
+      <label>Description</label>
+      <input type="text" [(ngModel)]="description" placeholder="About the risk factor…" />
+    </div>
+
+    <div class="item">
+      <label>TIF file</label>
+      <div class="file-upload">
+        <button type="button" class="upload-btn" (click)="tifUpload.click()">Upload</button>
+        <span class="file-name">{{ selectedTifFile?.name || 'No file uploaded yet' }}</span>
+      </div>
+      <input type="file" class="file-input" accept=".tif,.tiff" (change)="onTifFileSelected($event)" #tifUpload>
+    </div>
+
+    @if(errorMessage) {
+    <span class="error">{{ errorMessage }}</span>
+    }
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="submit-btn"
+        [disabled]="!isFormValid() || isUploading"
+        (click)="onSubmit()">
+        {{ isUploading ? 'Uploading…' : 'Create raster map' }}
+      </button>
+    </div>
+  </div>
+</div>

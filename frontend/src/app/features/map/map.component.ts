@@ -35,10 +35,13 @@ import {UserSummaryDto} from '../../shared/models/AdminModel/UserModel/UserSumma
 
 import { Router } from '@angular/router';
 import { EvaluatorProfileService } from '../../core/service/EvaluatorProfileService/EvaluatorProfileService';
+import { AdminRasterMapService } from '../../core/service/AdminService/AdminMapService/AdminRasterMapService';
+import { RasterMapsModalComponent } from './raster-maps-modal/raster-maps-modal';
+import { RasterUploadModalComponent } from './raster-upload-modal/raster-upload-modal';
 
 @Component({
   selector: 'app-map',
-  imports: [RouterModule, CommonModule, TranslocoPipe, MapLegendComponent, TooltipDescriptionComponent, ButtonComponent, EvaluationModalComponent, EvaluatorsModalComponent, EvaluationCommentComponent, FormsModule],
+  imports: [RouterModule, CommonModule, TranslocoPipe, MapLegendComponent, TooltipDescriptionComponent, ButtonComponent, EvaluationModalComponent, EvaluatorsModalComponent, EvaluationCommentComponent, FormsModule, RasterMapsModalComponent, RasterUploadModalComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css',
   standalone: true,
@@ -80,6 +83,10 @@ export class MapComponent implements AfterViewInit {
   saveMessage = '';
   isSaving = false;
 
+  showRasterMapsModal = signal<boolean>(false);
+  showRasterUploadModal = signal<boolean>(false);
+
+
   //redirecting purpose
   private evaluatorProfileService = inject(EvaluatorProfileService);
   private router = inject(Router);
@@ -97,7 +104,8 @@ export class MapComponent implements AfterViewInit {
     private meanMeasureService: MeanMeasureService,
     private modelEvaluationMeasureService: ModelEvaluationMeasureService,
     private reportService: ReportService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private adminRasterMapService: AdminRasterMapService
     ){
    this.mapMetrics= new MapMetrics(
         this.evaluatorAgreementMeasureService,
@@ -503,6 +511,37 @@ export class MapComponent implements AfterViewInit {
 
   onCloseEvaluatorsModal(): void {
     this.showEvaluatorsModal.set(false);
+  }
+
+  onOpenRasterMapsModal(): void {
+    this.showRasterMapsModal.set(true);
+  }
+
+  onCloseRasterMapsModal(): void {
+    this.showRasterMapsModal.set(false);
+  }
+
+  onDeleteRasterMap(rasterMapId: number): void {
+    if (!confirm('Are you sure you want to delete this raster map?')) {
+        return;
+      }
+    this.adminRasterMapService.deleteRasterMap(rasterMapId).subscribe({
+      next: () => {
+        this.rasterMaps.set(this.rasterMaps().filter(m => m.id !== rasterMapId));
+      },
+      error: (err) => console.error('Failed to delete raster map', err)
+    });
+  }
+
+  onOpenRasterUploadModal(): void {
+    this.showRasterUploadModal.set(true);
+  }
+
+  onCloseRasterUploadModal(uploaded: boolean = false): void {
+    this.showRasterUploadModal.set(false);
+    if (uploaded) {
+      this.loadBaseMap();
+    }
   }
 
   private showSaveMessage(message: string) {

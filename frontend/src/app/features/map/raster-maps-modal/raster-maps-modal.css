@@ -1,0 +1,131 @@
+.evaluators-modal {
+  position: absolute;
+  top: 17%;
+  right: 0;
+  width: 30%;
+  max-height: 58%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 2px solid #e2e6ea;
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #e2e6ea;
+  background: linear-gradient(135deg, #f0f4ed 0%, #f8faf6 100%);
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  color: #2d5016;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #666;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.empty-hint {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.evaluator-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evaluator-list li.evaluator-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  background: #fafbf9;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.evaluator-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #b02a2a;
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  color: #7a1c1c;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #e2e6ea;
+  background: #fafbf9;
+  margin-top: auto;
+}
+
+.footer app-button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .evaluators-modal {
+    position: static;
+    width: 100%;
+    max-height: none;
+  }
+}

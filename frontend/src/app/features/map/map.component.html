@@ -118,16 +118,19 @@
         <div class="metrics-header">
           {{ 'map.metric' | transloco }}
 
-
           @if(isAdmin){
-            <button
-              class="report-btn"
-              (click)="onReportButtonClicked()">
-              {{ 'map.report' | transloco }}
-            </button>
+          <button
+            class="report-btn"
+            (click)="onReportButtonClicked()">
+            {{ 'map.report' | transloco }}
+          </button>
+
+          <button
+            class="report-btn"
+            (click)="onOpenRasterMapsModal()">
+            Raster maps
+          </button>
           }
-
-
         </div>
 
         <div class="metrics-body">
@@ -224,6 +227,23 @@
   (close)="onCloseEvaluatorsModal()"
   (userSelected)="onEvaluatorSelected($event)">
 </app-evaluators-modal>
+}
+
+@if(isAdmin && showRasterMapsModal()) {
+<app-raster-maps-modal
+  [rasterMaps]="rasterMaps()"
+  [mapId]="mapId"
+  (close)="onCloseRasterMapsModal()"
+  (deleteRaster)="onDeleteRasterMap($event)"
+  (uploadRequested)="onOpenRasterUploadModal()">
+</app-raster-maps-modal>
+}
+
+@if(isAdmin && showRasterUploadModal()) {
+<app-raster-upload-modal
+  [mapId]="mapId"
+  (close)="onCloseRasterUploadModal($event)">
+</app-raster-upload-modal>
 }
 
 <!-- List of evaluations -->
