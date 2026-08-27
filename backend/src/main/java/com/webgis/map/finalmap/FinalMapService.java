@@ -4,7 +4,6 @@ import com.converter.ZipFiles;
 import com.webgis.evaluationform.EvaluationForm;
 import com.webgis.evaluationform.EvaluationFormService;
 import com.webgis.map.raster.RasterMap;
-import com.webgis.map.tile.Tile;
 import com.webgis.map.tile.TileService;
 import jakarta.transaction.Transactional;
 import org.geotools.api.referencing.FactoryException;
