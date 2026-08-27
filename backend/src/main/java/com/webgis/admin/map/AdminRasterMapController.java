@@ -32,5 +32,47 @@ public class AdminRasterMapController{
         this.rasterMapService = rasterMapService;
     }
 
-    @PostMapping("")
+    /**
+     * Adds a new raster map to an existing final map, generating its tiles
+     * from the given tif file.
+     *
+     * @param finalMapId id of the final map this raster map belongs to
+     * @param title title of the new raster map
+     * @param description description of the new raster map
+     * @param tifFile tif file to generate tiles from
+     *
+     * @return the created raster map, or not found if the final map doesn't exist
+     */
+    @PostMapping(value = "/finalMap/{finalMapId}", consumes = "multipart/form-data")
+    public ResponseEntity<Object> addRasterMap(
+            @PathVariable long finalMapId,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("tifFile") MultipartFile tifFile
+    ){
+        try{
+            final RasterMap created = rasterMapService.addRasterMap(finalMapId, title, description, tifFile);
+            return ResponseEntity.status(200).body(
+                    new RasterMapListDto(created.getId(), created.getTitle()));
+        }catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).body(new MessageDto(e.getMessage()));
+        }
+    }
+
+    /**
+     * Deletes a raster map and all of its associated tiles.
+     *
+     * @param id id of the raster map to delete
+     *
+     * @return Ok if deleted, not found otherwise
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteRasterMap(@PathVariable long id) {
+        try{
+            rasterMapService.deleteRasterMap(id);
+            return ResponseEntity.status(200).body(new MessageDto("Raster map deleted successfully"));
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.status(404).body(new MessageDto(e.getMessage()));
+        }
+    }
 }
