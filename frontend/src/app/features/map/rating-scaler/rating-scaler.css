@@ -40,6 +40,7 @@
   background: #5a8f32;
 }
 
-.rating-system:not(.fill) input:checked + label {
+.rating-system:not(.fill) input:checked + label,
+.rating-system:not(.fill) label:hover {
   background: #5a8f32;
 }

@@ -123,7 +123,7 @@
     "firstcriteria": "Risk assessment (1-4)",
     "firstdescription": "Indicate your degree of agreement between the modelled average risk index and the actual risk as you perceive it in the field. Please answer on a scale of 1 to 4: 1 = strongly disagree 2 = somewhat disagree 3 = somewhat agree 4 = strongly agree",
     "secondcriteria": "Certainty (1-4)",
-    "seconddescription": "Indicate your level of certainty regarding your own assessment. In other words, how confident are you in your answer? Please answer on a scale of 1 to 4: 1 = very uncertain 2 = somewhat uncertain 3 = somewhat certain 4 = very certain",
+    "seconddescription": "Indicate your level of certainty regarding your own assessment. In other words, how confident are you in your answers? Please answer on a scale of 1 to 4: 1 = very uncertain 2 = somewhat uncertain 3 = somewhat certain 4 = very certain",
     "thirdcriteria": "Perceived risk (low-high)",
     "thirddescription": "Please indicate the risk category you assign to this department based on your perception of the field, your expertise and the information available to you. Possible choices: low, medium, high.",
     "fourthcriteria": "Visibility",

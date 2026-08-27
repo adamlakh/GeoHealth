@@ -2,6 +2,11 @@
   background-color: #EBEFFF;
   overflow-x : hidden;
 }
+
+.navigation-page ::ng-deep .leaflet-control-attribution {
+  display: none !important;
+}
+
 /* SIDEBAR */
 * {
   margin: 0;
@@ -9,7 +14,8 @@
   box-sizing: border-box;
 }
 .side-navbar {
-  height: 92%;
+  top: 60px;
+  height: calc(100% - 60px);
   width: 250px;
   position: fixed;
   left: -250px;
@@ -538,9 +544,23 @@ span {
     width: 35vw;
     height : 15vh;
   }
-  .all-maps {
-    padding: 0 12px;
-    overflow-x: hidden;
+  .all-the-maps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
+}
+
+
+.page-footer {
+  width: 100%;
+  padding: 32px 0;
+  text-align: center;
+  font-size: 1.3em;
+  color: var(--dark-grey);
+}
+
+.page-footer a {
+  color: inherit;
+  text-decoration: underline;
 }

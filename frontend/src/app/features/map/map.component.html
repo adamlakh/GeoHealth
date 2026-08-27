@@ -89,11 +89,11 @@
       }
       </div>
 
-    @if(!mapHelper.isRasterActive()) {
     <map-legend
       [mapType]="mapTag().at(1)"
-      [season]="mapTag().at(0)"/>
-    }
+      [season]="mapTag().at(0)"
+      [isRaster]="mapHelper.isRasterActive()"/>
+
 
   </div> <!-- end map-container -->
 
@@ -181,15 +181,13 @@
               </div>
             }
           }
-
         </div>
       </div>
 
 
-
     <!-- Buttons evaluation from -->
     <div class="side-footer">
-      @if(!showEvaluationModal()){
+      @if(!showEvaluationModal() && selectedDivision()){
         <app-button
           [text]="existingForm() ? ('map.editbutton' | transloco) : ('map.addbutton' | transloco)"
           [variant]="'success'"

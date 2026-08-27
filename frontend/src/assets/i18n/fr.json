@@ -123,7 +123,7 @@
     "firstcriteria": "Évaluation du risque (1-4)",
     "firstdescription": "Indiquez votre degré d'accord entre l'indice de risque moyen modélisé et le risque réel tel que vous le percevez sur le terrain.Veuillez répondre sur une échelle de 1 à 4 :1 = pas du tout d'accord 2 = plutôt pas d'accord 3 = plutôt d'accord 4 = tout à fait d'accord",
     "secondcriteria": "Certitude (1-4)",
-    "seconddescription": "Indiquez votre niveau de certitude concernant votre propre évaluation. Autrement dit, à quel point êtes-vous sûr(e) de votre réponse ? Veuillez répondre sur une échelle de 1 à 4 : 1 = très incertain(e) 2 = plutôt incertain(e) 3 = plutôt certain(e) 4 = très certain(e)",
+    "seconddescription": "Indiquez votre niveau de certitude concernant votre propre évaluation. Autrement dit, à quel point êtes-vous sûr(e) de vos réponses ? Veuillez répondre sur une échelle de 1 à 4 : 1 = très incertain(e) 2 = plutôt incertain(e) 3 = plutôt certain(e) 4 = très certain(e)",
     "thirdcriteria": "Risque perçu (faible-élevé)",
     "thirddescription": "Veuillez indiquer la catégorie de risque que vous attribuez à ce département sur la base de votre perception du terrain, de votre expertise et des informations dont vous disposez. Choix possibles : faible, moyen, élevé.",
     "fourthcriteria": "Visibilité",
@@ -344,6 +344,6 @@
     "edit": "Modifier",
     "save": "Enregistrer",
     "saveSuccess": "Profil enregistré avec succès.",
-    "completeProfilePrompt": "Please complete your evaluator profile before committing any evaluation."
+    "completeProfilePrompt": "Veuillez compléter votre profil d'évaluateur avant d'évaluer des cartes."
   }
 }
