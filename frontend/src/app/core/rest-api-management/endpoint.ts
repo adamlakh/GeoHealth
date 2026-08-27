@@ -24,8 +24,9 @@ export const API_ENDPOINTS = {
         UPLOAD: '/admin/finalMaps/uploadShapeFile'
       },
       RASTERMAPS: {
-        UPLOAD: '/admin/rasterMaps/file'
-      }
+        UPLOAD: '/admin/rasterMaps/finalMap',
+        DELETE: '/admin/rasterMaps/delete'
+        }
     },
     EVALUATIONFORM:{
       GETALLFORMFORAMAP:"/admin/evaluationForm/allFormForFinalMap",

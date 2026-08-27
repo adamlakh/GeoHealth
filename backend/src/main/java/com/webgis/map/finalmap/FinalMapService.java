@@ -4,7 +4,6 @@ import com.converter.ZipFiles;
 import com.webgis.evaluationform.EvaluationForm;
 import com.webgis.evaluationform.EvaluationFormService;
 import com.webgis.map.raster.RasterMap;
-import com.webgis.map.tile.Tile;
 import com.webgis.map.tile.TileService;
 import jakarta.transaction.Transactional;
 import org.geotools.api.referencing.FactoryException;
@@ -83,10 +82,7 @@ public class FinalMapService {
 
         //Delete all the tile link to the raster map
         for (RasterMap rasterMap : rasterMaps) {
-            final List<Tile> tiles = tileService.allTileForAspecificRasterMap(rasterMap);
-            for (Tile tile : tiles) {
-                tileService.deleteTile(tile.getTileId());
-            }
+            tileService.deleteAllTilesForRasterMap(rasterMap);
         }
 
         //Delete forms linked to the map

@@ -1,0 +1,25 @@
+<div cdkDrag class="evaluators-modal">
+  <div class="modal-header" cdkDragHandle>
+    <h2>Raster maps</h2>
+    <button class="close-btn" (click)="onClose()">×</button>
+  </div>
+
+  <div class="modal-content">
+    <p class="empty-hint" *ngIf="rasterMaps.length === 0">No raster maps for this map yet.</p>
+
+    <ul class="evaluator-list" *ngIf="rasterMaps.length > 0">
+      <li *ngFor="let map of rasterMaps" class="evaluator-item">
+        <span class="evaluator-name">{{ map.title }}</span>
+        <button class="remove-btn" (click)="onDelete(map.id)" aria-label="Delete raster map">×</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <app-button
+      [text]="'Upload risk factor'"
+      [variant]="'success'"
+      (click)="onUploadClick()">
+    </app-button>
+  </div>
+</div>

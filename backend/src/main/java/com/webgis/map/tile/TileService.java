@@ -229,4 +229,13 @@ public class TileService {
     public List<Tile> allTileForAspecificRasterMap(RasterMap rasterMap){
         return tileRepository.findTileByRasterMap(rasterMap);
     }
+
+    /**
+     * Delete all the tiles corresponding to a given raster map in one bulk operation.
+     *
+     * @param rasterMap the raster map to delete
+     */
+    public void deleteAllTilesForRasterMap(RasterMap rasterMap){
+        tileRepository.deleteAllByRasterMapId(rasterMap.getId());
+    }
 }
