@@ -83,10 +83,7 @@ public class FinalMapService {
 
         //Delete all the tile link to the raster map
         for (RasterMap rasterMap : rasterMaps) {
-            final List<Tile> tiles = tileService.allTileForAspecificRasterMap(rasterMap);
-            for (Tile tile : tiles) {
-                tileService.deleteTile(tile.getTileId());
-            }
+            tileService.deleteAllTilesForRasterMap(rasterMap);
         }
 
         //Delete forms linked to the map
