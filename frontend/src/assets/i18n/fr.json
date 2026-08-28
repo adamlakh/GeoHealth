@@ -107,7 +107,7 @@
     "nomap": "Aucune carte trouvée",
     "try-another": "Essayez un autre titre ou effacez la recherche.",
     "backto": "Retour à toutes les cartes",
-    "final-map" : "Cartes de risque finale",
+    "final-map" : "Cartes des maladies",
     "factor-map" : "Cartes de facteurs de risque",
     "search-placeholder":  "Rechercher..."
   },
@@ -294,7 +294,7 @@
     "interventionLevels": {
       "national": "National",
       "regional": "Régional",
-      "divisional": "Niveau divisionnaire",
+      "divisional": "Niveau départemental",
       "healthDistrict": "District sanitaire",
       "other": "Autre"
     },
